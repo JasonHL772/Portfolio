@@ -87,10 +87,31 @@ nav {
   font-size: clamp(5rem, 12vw, 12rem);
   line-height: 0.88;
   letter-spacing: 0.01em;
-  color: var(--text);
-  animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  background: linear-gradient(
+    105deg,
+    var(--text) 0%,
+    var(--text) 35%,
+    #fffdf0 46%,
+    var(--accent) 50%,
+    #fffdf0 54%,
+    var(--text) 65%,
+    var(--text) 100%
+  );
+  background-size: 300% 100%;
+  background-position: 100% center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both,
+             nameShimmer 4s 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
-.hero-name span { color: var(--accent); }
+.hero-name span { -webkit-text-fill-color: var(--accent); }
+
+@keyframes nameShimmer {
+  0%   { background-position: 100% center; }
+  50%  { background-position: -100% center; }
+  100% { background-position: 100% center; }
+}
 .hero-sub {
   font-family: var(--mono);
   font-size: 10px;
@@ -124,7 +145,7 @@ nav {
   position: relative;
   display: flex;
   align-items: flex-start;
-  overflow: hidden;
+  overflow: visible;
   padding-bottom: 1rem;
 }
 .tl-track::before {
@@ -142,7 +163,10 @@ nav {
   padding-top: 1.5rem;
   padding-right: 0.5rem;
   animation: nodeIn 0.5s both;
+  transform-origin: top left;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.tl-node:hover { transform: scale(1.13); }
 .tl-node:nth-child(1) { animation-delay: 0.4s; }
 .tl-node:nth-child(2) { animation-delay: 0.55s; }
 .tl-node:nth-child(3) { animation-delay: 0.7s; }
@@ -462,7 +486,6 @@ footer {
 
   <!-- TIMELINE -->
   <div class="timeline-section">
-    <p class="timeline-label">Timeline — Aug 2023 → Present</p>
     <div class="tl-track">
 
       <div class="tl-node">
