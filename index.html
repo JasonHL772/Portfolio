@@ -479,14 +479,12 @@ footer {
 .str-gfr  { animation: strGfr  10s ease-in-out infinite; }
 .str-cub  { animation: strCub  10s ease-in-out infinite; }
 .str-load { animation: strLoad 10s ease-in-out infinite; }
-/* base yaw is shown as a small perspective sweep around the pedestal */
-@keyframes strBase { 0%,9%{transform:translateX(0) scaleX(1)} 18%{transform:translateX(-10px) scaleX(.94)} 29%{transform:translateX(12px) scaleX(.96)} 39%,100%{transform:translateX(0) scaleX(1)} }
-/* shoulder pitch: home arch -> reach left/down -> lift */
-@keyframes strShld { 0%,9%{transform:rotate(-24deg)} 38%{transform:rotate(-24deg)} 51%,66%{transform:rotate(-76deg)} 79%,90%{transform:rotate(-36deg)} 100%{transform:rotate(-24deg)} }
-/* elbow pitch: bent home -> extended reach -> tucked lift */
-@keyframes strElbw { 0%,9%{transform:rotate(58deg)} 38%{transform:rotate(58deg)} 51%,66%{transform:rotate(-38deg)} 79%,90%{transform:rotate(44deg)} 100%{transform:rotate(58deg)} }
-/* wrist pitch keeps the gripper square to the cube, then levels for return */
-@keyframes strWrp  { 0%,9%{transform:rotate(-28deg)} 38%{transform:rotate(-28deg)} 51%,66%{transform:rotate(112deg)} 79%,90%{transform:rotate(8deg)} 100%{transform:rotate(-28deg)} }
+/* J1: turret/arm yaws about the cylinder center while the base stays bolted down */
+@keyframes strBase { 0%,8%{transform:rotate(0deg)} 16%{transform:rotate(-9deg)} 27%{transform:rotate(8deg)} 38%{transform:rotate(-6deg)} 51%,68%{transform:rotate(-14deg)} 80%,91%{transform:rotate(4deg)} 100%{transform:rotate(0deg)} }
+/* scanning joint motion, then the commanded reach and lift */
+@keyframes strShld { 0%,8%{transform:rotate(-18deg)} 16%{transform:rotate(-30deg)} 27%{transform:rotate(-13deg)} 38%{transform:rotate(-24deg)} 51%,66%{transform:rotate(-76deg)} 80%,91%{transform:rotate(-34deg)} 100%{transform:rotate(-18deg)} }
+@keyframes strElbw { 0%,8%{transform:rotate(48deg)} 16%{transform:rotate(62deg)} 27%{transform:rotate(36deg)} 38%{transform:rotate(54deg)} 51%,66%{transform:rotate(-58deg)} 80%,91%{transform:rotate(42deg)} 100%{transform:rotate(48deg)} }
+@keyframes strWrp  { 0%,8%{transform:rotate(-24deg)} 16%{transform:rotate(-12deg)} 27%{transform:rotate(-34deg)} 38%{transform:rotate(-22deg)} 51%,66%{transform:rotate(44deg)} 80%,91%{transform:rotate(4deg)} 100%{transform:rotate(-24deg)} }
 /* wrist roll: 270deg spin mid-sequence to demonstrate the roll DOF */
 @keyframes strRoll { 0%,63%{transform:rotate(0deg)} 76%{transform:rotate(270deg)} 88%{transform:rotate(270deg)} 100%{transform:rotate(360deg)} }
 /* gripper: open -> close on cube -> open on reset */
@@ -594,12 +592,12 @@ footer {
                 <stop offset="0.45" stop-color="#2b2b29"/>
                 <stop offset="1" stop-color="#0c0c0b"/>
               </linearGradient>
-              <linearGradient id="strWhiteLink" x1="90" y1="88" x2="111" y2="132" gradientUnits="userSpaceOnUse">
+              <linearGradient id="strFirstLink" x1="86" y1="132" x2="114" y2="184" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#faf7ef"/>
                 <stop offset="0.58" stop-color="#d9d5ca"/>
                 <stop offset="1" stop-color="#f4f0e7"/>
               </linearGradient>
-              <linearGradient id="strDarkLink" x1="84" y1="130" x2="116" y2="184" gradientUnits="userSpaceOnUse">
+              <linearGradient id="strBlackLink" x1="90" y1="88" x2="111" y2="132" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#343431"/>
                 <stop offset="1" stop-color="#121211"/>
               </linearGradient>
@@ -622,31 +620,32 @@ footer {
               <path d="M64 208 L72 203 L72 218 L64 223 Z" style="fill:#682020"/>
               <path d="M51 206 L58 204 L63 205 L56 207 Z" style="fill:#d06464;opacity:0.45"/>
             </g>
-            <g class="str-base" style="transform-origin:100px 222px">
-              <ellipse cx="100" cy="250" rx="36" ry="6" style="fill:#0d0d0b"/>
-              <rect x="69" y="222" width="62" height="11" rx="2" style="fill:#171716;stroke:#393833;stroke-width:0.8"/>
-              <circle cx="77" cy="226" r="1.6" style="fill:#5b5952"/>
-              <circle cx="123" cy="226" r="1.6" style="fill:#5b5952"/>
-              <path d="M80 188 H120 V222 H80 Z" style="fill:url(#strCyl)"/>
+            <ellipse cx="100" cy="250" rx="36" ry="6" style="fill:#0d0d0b"/>
+            <rect x="69" y="222" width="62" height="11" rx="2" style="fill:#171716;stroke:#393833;stroke-width:0.8"/>
+            <circle cx="77" cy="226" r="1.6" style="fill:#5b5952"/>
+            <circle cx="123" cy="226" r="1.6" style="fill:#5b5952"/>
+            <path d="M80 188 H120 V222 H80 Z" style="fill:url(#strCyl)"/>
+            <ellipse cx="100" cy="222" rx="20" ry="6" style="fill:#151514;stroke:#33322f;stroke-width:0.7"/>
+            <rect x="82" y="188" width="36" height="34" style="fill:#060606;opacity:0.18"/>
+            <rect x="82" y="198" width="10" height="16" rx="2" style="fill:#111110;stroke:#3b3934;stroke-width:0.7"/>
+            <rect x="84" y="201" width="6" height="3" rx="1" style="fill:#57b7c1;opacity:0.9"/>
+            <g class="str-base" style="transform-origin:100px 188px">
               <ellipse cx="100" cy="188" rx="20" ry="6" style="fill:#383835;stroke:#5a5851;stroke-width:0.8"/>
-              <ellipse cx="100" cy="222" rx="20" ry="6" style="fill:#151514;stroke:#33322f;stroke-width:0.7"/>
-              <rect x="82" y="188" width="36" height="34" style="fill:#060606;opacity:0.18"/>
-              <rect x="82" y="198" width="10" height="16" rx="2" style="fill:#111110;stroke:#3b3934;stroke-width:0.7"/>
-              <rect x="84" y="201" width="6" height="3" rx="1" style="fill:#57b7c1;opacity:0.9"/>
+              <circle cx="90" cy="188" r="1.6" style="fill:#c8b97a;opacity:0.85"/>
               <path d="M83 185 C84 174 90 167 100 167 C110 167 116 174 117 185 L108 185 C107 180 104 176 100 176 C96 176 93 180 92 185 Z" style="fill:#181817;stroke:#3f3e39;stroke-width:1"/>
               <circle cx="100" cy="184" r="14" style="fill:#0f0f0e;stroke:#4e4c45;stroke-width:1.2"/>
               <circle cx="100" cy="184" r="8" style="fill:#2f2f2c"/>
               <g class="str-shld" style="transform-origin:100px 184px">
-                <path d="M88 181 L85 140 C85 133 90 129 97 129 H106 C113 129 116 134 114 141 L109 181 Z" style="fill:url(#strDarkLink);stroke:#57554d;stroke-width:1"/>
-                <path d="M101 132 H109 C114 134 116 139 114 145 L110 178 C106 176 102 173 99 169 Z" style="fill:#111110;opacity:0.42"/>
-                <path d="M91 145 L108 137" stroke="#5b5a54" stroke-width="0.8" opacity="0.7"/>
+                <path d="M88 181 L85 140 C85 133 90 129 97 129 H106 C113 129 116 134 114 141 L109 181 Z" style="fill:url(#strFirstLink);stroke:#c8c4b8;stroke-width:1"/>
+                <path d="M101 132 H109 C114 134 116 139 114 145 L110 178 C106 176 102 173 99 169 Z" style="fill:#cfcabe;opacity:0.45"/>
+                <path d="M91 145 L108 137" stroke="#ffffff" stroke-width="0.8" opacity="0.42"/>
                 <circle cx="100" cy="184" r="10" style="fill:#20201e;stroke:#626057;stroke-width:1.2"/>
                 <circle cx="100" cy="184" r="4" style="fill:#6c6961"/>
                 <g class="str-elbw" style="transform-origin:100px 132px">
-                  <path d="M94 132 L90 98 C89 91 94 86 100 86 C106 86 111 91 110 98 L106 132 Z" style="fill:url(#strWhiteLink);stroke:#bcb8ad;stroke-width:1"/>
-                  <path d="M103 88 C109 91 111 96 109 103 L106 130" stroke="#ffffff" stroke-width="2" opacity="0.35"/>
+                  <path d="M94 132 L90 98 C89 91 94 86 100 86 C106 86 111 91 110 98 L106 132 Z" style="fill:url(#strBlackLink);stroke:#4d4b45;stroke-width:1"/>
+                  <path d="M103 88 C109 91 111 96 109 103 L106 130" stroke="#5b5952" stroke-width="1.8" opacity="0.45"/>
                   <circle cx="100" cy="132" r="11" style="fill:#171716;stroke:#56544d;stroke-width:1.1"/>
-                  <circle cx="100" cy="132" r="5" style="fill:#d8d4ca;stroke:#8b867d;stroke-width:0.7"/>
+                  <circle cx="100" cy="132" r="5" style="fill:#242422;stroke:#77746d;stroke-width:0.7"/>
                   <circle cx="96" cy="119" r="1.5" style="fill:#77746d"/>
                   <circle cx="104" cy="96" r="1.5" style="fill:#77746d"/>
                   <g class="str-wrp" style="transform-origin:100px 90px">
