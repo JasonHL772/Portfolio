@@ -91,11 +91,11 @@ nav {
   animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .hero-dot { color: var(--accent); }
-.nl { animation: goldPulse 4s linear infinite; }
+.nl { animation: goldPulse 9s linear infinite; }
 @keyframes goldPulse {
   0%   { color: var(--text); }
-  8%   { color: var(--accent); }
-  18%  { color: var(--text); }
+  2%   { color: var(--accent); }
+  6%   { color: var(--text); }
   100% { color: var(--text); }
 }
 .hero-sub {
@@ -403,9 +403,11 @@ nav {
   background: var(--surface); padding: 2rem;
   display: flex; flex-direction: column; gap: 0.65rem;
   cursor: none; text-decoration: none; color: inherit;
-  transition: background 0.25s;
-  position: relative; overflow: hidden;
+  transition: background 0.25s, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  transform-origin: top left;
 }
+.sv-card:hover { transform: scale(1.04); }
 .sv-card::after {
   content: '→';
   position: absolute; bottom: 1.5rem; right: 1.5rem;
@@ -642,7 +644,7 @@ footer {
     </div>
   </div>
 
-  <footer>© 2026 Jason Hernandez Lopez — Robotics Engineering · University of Michigan</footer>
+  <footer>Designed &amp; built by Jason Hernandez Lopez · 2026</footer>
 </div>
 
 <!-- ── STRYKER picker ── -->
@@ -657,7 +659,7 @@ footer {
         <span class="sv-v">Version 01</span>
         <p class="sv-name">STRYKER V1</p>
         <p class="sv-desc">First build — joint layout established, 3D-printed structure assembled, servo-based actuation prototyped end-to-end.</p>
-        <div class="sv-tags"><span class="mtag">3D Printing</span><span class="mtag">ESP32</span><span class="mtag">Servo PWM</span></div>
+        <div class="sv-tags"><span class="mtag">Rapid Prototyping</span><span class="mtag">Mechatronics</span><span class="mtag">Product Design</span></div>
       </a>
       <a class="sv-card" onclick="show('stryker2')" href="#">
         <span class="sv-v">Version 02</span>
