@@ -87,30 +87,16 @@ nav {
   font-size: clamp(5rem, 12vw, 12rem);
   line-height: 0.88;
   letter-spacing: 0.01em;
-  background: linear-gradient(
-    105deg,
-    var(--text) 0%,
-    var(--text) 35%,
-    #fffdf0 46%,
-    var(--accent) 50%,
-    #fffdf0 54%,
-    var(--text) 65%,
-    var(--text) 100%
-  );
-  background-size: 300% 100%;
-  background-position: 100% center;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both,
-             nameShimmer 4s 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  color: var(--text);
+  animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-.hero-name span { -webkit-text-fill-color: var(--accent); }
-
-@keyframes nameShimmer {
-  0%   { background-position: 100% center; }
-  50%  { background-position: -100% center; }
-  100% { background-position: 100% center; }
+.hero-dot { color: var(--accent); }
+.nl { animation: goldPulse 4s linear infinite; }
+@keyframes goldPulse {
+  0%   { color: var(--text); }
+  8%   { color: var(--accent); }
+  18%  { color: var(--text); }
+  100% { color: var(--text); }
 }
 .hero-sub {
   font-family: var(--mono);
@@ -162,16 +148,16 @@ nav {
   position: relative;
   padding-top: 1.5rem;
   padding-right: 0.5rem;
-  animation: nodeIn 0.5s both;
   transform-origin: top left;
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .tl-node:hover { transform: scale(1.13); }
-.tl-node:nth-child(1) { animation-delay: 0.4s; }
-.tl-node:nth-child(2) { animation-delay: 0.55s; }
-.tl-node:nth-child(3) { animation-delay: 0.7s; }
-.tl-node:nth-child(4) { animation-delay: 0.85s; }
-.tl-node:nth-child(5) { animation-delay: 1.0s; }
+.tl-inner { animation: nodeIn 0.5s both; }
+.tl-node:nth-child(1) .tl-inner { animation-delay: 0.4s; }
+.tl-node:nth-child(2) .tl-inner { animation-delay: 0.55s; }
+.tl-node:nth-child(3) .tl-inner { animation-delay: 0.7s; }
+.tl-node:nth-child(4) .tl-inner { animation-delay: 0.85s; }
+.tl-node:nth-child(5) .tl-inner { animation-delay: 1.0s; }
 @keyframes nodeIn {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -240,8 +226,9 @@ nav {
   text-decoration: none;
   color: inherit;
   position: relative;
-  overflow: hidden;
-  transition: border-color 0.3s;
+  z-index: 1;
+  transform-origin: left center;
+  transition: border-color 0.3s, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .menu-row::before {
   content: '';
@@ -253,7 +240,7 @@ nav {
   z-index: 0;
 }
 .menu-row:hover::before { transform: scaleX(1); }
-.menu-row:hover { border-color: var(--border2); }
+.menu-row:hover { border-color: var(--border2); transform: scale(1.03); z-index: 2; }
 .menu-row:hover .menu-pname { color: var(--accent); }
 .menu-row:hover .menu-num { color: var(--accent); }
 .menu-row:hover .menu-arrow { opacity: 1; transform: translateX(0); }
@@ -480,7 +467,7 @@ footer {
 <div id="home" class="page active">
 
   <div class="hero">
-    <h1 class="hero-name">JASON<br>HERNANDEZ<br>LOPEZ<span>.</span></h1>
+    <h1 class="hero-name"><span class="nl" style="animation-delay:1.0s">J</span><span class="nl" style="animation-delay:1.2s">A</span><span class="nl" style="animation-delay:1.4s">S</span><span class="nl" style="animation-delay:1.6s">O</span><span class="nl" style="animation-delay:1.8s">N</span><br><span class="nl" style="animation-delay:2.0s">H</span><span class="nl" style="animation-delay:2.2s">E</span><span class="nl" style="animation-delay:2.4s">R</span><span class="nl" style="animation-delay:2.6s">N</span><span class="nl" style="animation-delay:2.8s">A</span><span class="nl" style="animation-delay:3.0s">N</span><span class="nl" style="animation-delay:3.2s">D</span><span class="nl" style="animation-delay:3.4s">E</span><span class="nl" style="animation-delay:3.6s">Z</span><br><span class="nl" style="animation-delay:3.8s">L</span><span class="nl" style="animation-delay:4.0s">O</span><span class="nl" style="animation-delay:4.2s">P</span><span class="nl" style="animation-delay:4.4s">E</span><span class="nl" style="animation-delay:4.6s">Z</span><span class="hero-dot">.</span></h1>
     <p class="hero-sub">Robotics Engineer · University of Michigan — Ann Arbor · Class of 2027</p>
   </div>
 
@@ -490,37 +477,47 @@ footer {
 
       <div class="tl-node">
         <div class="tl-dot"></div>
-        <p class="tl-date">Aug '23</p>
-        <p class="tl-role">Freshman Year</p>
-        <p class="tl-place">UMich</p>
+        <div class="tl-inner">
+          <p class="tl-date">Aug '23</p>
+          <p class="tl-role">Freshman Year</p>
+          <p class="tl-place">UMich</p>
+        </div>
       </div>
 
       <div class="tl-node">
         <div class="tl-dot"></div>
-        <p class="tl-date">Jan '25</p>
-        <p class="tl-role">Robot Tech<br>Site Lead</p>
-        <p class="tl-place">Starship</p>
+        <div class="tl-inner">
+          <p class="tl-date">Jan '25</p>
+          <p class="tl-role">Robot Tech<br>Site Lead</p>
+          <p class="tl-place">Starship</p>
+        </div>
       </div>
 
       <div class="tl-node">
         <div class="tl-dot"></div>
-        <p class="tl-date">May '25</p>
-        <p class="tl-role">Hardware<br>Intern</p>
-        <p class="tl-place">Serve Robotics</p>
+        <div class="tl-inner">
+          <p class="tl-date">May '25</p>
+          <p class="tl-role">Hardware<br>Intern</p>
+          <p class="tl-place">Serve Robotics</p>
+        </div>
       </div>
 
       <div class="tl-node">
         <div class="tl-dot"></div>
-        <p class="tl-date">Jan '26</p>
-        <p class="tl-role">Hardware<br>Intern</p>
-        <p class="tl-place">New Haptics</p>
+        <div class="tl-inner">
+          <p class="tl-date">Jan '26</p>
+          <p class="tl-role">Hardware<br>Intern</p>
+          <p class="tl-place">New Haptics</p>
+        </div>
       </div>
 
       <div class="tl-node">
         <div class="tl-dot now"></div>
-        <p class="tl-date">Present</p>
-        <p class="tl-role">Junior Year</p>
-        <p class="tl-place">Ann Arbor, MI</p>
+        <div class="tl-inner">
+          <p class="tl-date">Present</p>
+          <p class="tl-role">Junior Year</p>
+          <p class="tl-place">Ann Arbor, MI</p>
+        </div>
       </div>
 
     </div>
