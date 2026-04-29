@@ -478,21 +478,22 @@ footer {
 .str-gfl  { animation: strGfl  10s ease-in-out infinite; }
 .str-gfr  { animation: strGfr  10s ease-in-out infinite; }
 .str-cub  { animation: strCub  10s ease-in-out infinite; }
-/* base rotation as lateral sweep (perspective projection of yaw) */
-@keyframes strBase { 0%,6%{transform:translateX(0)} 16%{transform:translateX(-20px)} 28%{transform:translateX(18px)} 38%,100%{transform:translateX(0)} }
-/* shoulder (pivot 100,220): home slight-right → reach left for cube → lift high */
-@keyframes strShld { 0%,6%{transform:rotate(8deg)} 38%{transform:rotate(8deg)} 50%{transform:rotate(-20deg)} 70%{transform:rotate(-20deg)} 82%{transform:rotate(-12deg)} 92%{transform:rotate(-12deg)} 100%{transform:rotate(8deg)} }
-/* elbow (pivot 100,160): home arch → extend forward/down → retract lift */
-@keyframes strElbw { 0%,6%{transform:rotate(18deg)} 38%{transform:rotate(18deg)} 50%{transform:rotate(50deg)} 70%{transform:rotate(50deg)} 82%{transform:rotate(10deg)} 92%{transform:rotate(10deg)} 100%{transform:rotate(18deg)} }
-/* wrist pitch (pivot 100,120): home tucked → pitch down to grip → lift orient */
-@keyframes strWrp  { 0%,6%{transform:rotate(-18deg)} 38%{transform:rotate(-18deg)} 50%{transform:rotate(-50deg)} 70%{transform:rotate(-50deg)} 82%{transform:rotate(8deg)} 92%{transform:rotate(8deg)} 100%{transform:rotate(-18deg)} }
-/* wrist roll: 270° spin mid-sequence to demonstrate DOF */
-@keyframes strRoll { 0%,62%{transform:rotate(0deg)} 75%{transform:rotate(270deg)} 86%{transform:rotate(270deg)} 100%{transform:rotate(360deg)} }
-/* gripper: open → close on cube → open on release */
-@keyframes strGfl  { 0%,46%{transform:rotate(-32deg)} 55%,88%{transform:rotate(5deg)} 96%,100%{transform:rotate(-32deg)} }
-@keyframes strGfr  { 0%,46%{transform:rotate(32deg)}  55%,88%{transform:rotate(-5deg)} 96%,100%{transform:rotate(32deg)} }
-/* cube fades when gripped */
-@keyframes strCub  { 0%,52%{opacity:1} 58%{opacity:0} 100%{opacity:0} }
+.str-load { animation: strLoad 10s ease-in-out infinite; }
+/* base yaw is shown as a small perspective sweep around the pedestal */
+@keyframes strBase { 0%,9%{transform:translateX(0) scaleX(1)} 18%{transform:translateX(-10px) scaleX(.94)} 29%{transform:translateX(12px) scaleX(.96)} 39%,100%{transform:translateX(0) scaleX(1)} }
+/* shoulder pitch: home arch -> reach left/down -> lift */
+@keyframes strShld { 0%,9%{transform:rotate(-24deg)} 38%{transform:rotate(-24deg)} 51%,66%{transform:rotate(-76deg)} 79%,90%{transform:rotate(-36deg)} 100%{transform:rotate(-24deg)} }
+/* elbow pitch: bent home -> extended reach -> tucked lift */
+@keyframes strElbw { 0%,9%{transform:rotate(58deg)} 38%{transform:rotate(58deg)} 51%,66%{transform:rotate(-38deg)} 79%,90%{transform:rotate(44deg)} 100%{transform:rotate(58deg)} }
+/* wrist pitch keeps the gripper square to the cube, then levels for return */
+@keyframes strWrp  { 0%,9%{transform:rotate(-28deg)} 38%{transform:rotate(-28deg)} 51%,66%{transform:rotate(112deg)} 79%,90%{transform:rotate(8deg)} 100%{transform:rotate(-28deg)} }
+/* wrist roll: 270deg spin mid-sequence to demonstrate the roll DOF */
+@keyframes strRoll { 0%,63%{transform:rotate(0deg)} 76%{transform:rotate(270deg)} 88%{transform:rotate(270deg)} 100%{transform:rotate(360deg)} }
+/* gripper: open -> close on cube -> open on reset */
+@keyframes strGfl  { 0%,47%{transform:rotate(-14deg)} 56%,88%{transform:rotate(3deg)} 96%,100%{transform:rotate(-14deg)} }
+@keyframes strGfr  { 0%,47%{transform:rotate(14deg)}  56%,88%{transform:rotate(-3deg)} 96%,100%{transform:rotate(14deg)} }
+@keyframes strCub  { 0%,53%{opacity:1} 59%,90%{opacity:0} 97%,100%{opacity:1} }
+@keyframes strLoad { 0%,55%{opacity:0} 61%,88%{opacity:1} 96%,100%{opacity:0} }
 
 /* SENTINEL - balancing wobble */
 .sen-body { animation: senBalance 2.8s ease-in-out infinite; }
@@ -587,79 +588,99 @@ footer {
         <!-- STRYKER: 6-DOF arm — base scan, detect, pick, wrist roll, lift -->
         <div class="rv-panel active" onclick="show('stryker')">
           <svg class="rv-svg" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- ground -->
-            <line x1="18" y1="248" x2="182" y2="248" stroke="#383731" stroke-width="1"/>
-            <!-- work mat -->
-            <rect x="28" y="230" width="144" height="18" rx="1" style="fill:#181816;stroke:#2a2a28;stroke-width:0.6"/>
-            <!-- ArUco corner markers -->
-            <rect x="32" y="233" width="8" height="8" rx="0.5" style="fill:#282826"/>
-            <rect x="160" y="233" width="8" height="8" rx="0.5" style="fill:#282826"/>
-            <rect x="33" y="234" width="3" height="3" style="fill:#111110"/>
-            <rect x="164" y="234" width="3" height="3" style="fill:#111110"/>
-            <!-- red target cube -->
+            <defs>
+              <linearGradient id="strCyl" x1="78" y1="184" x2="122" y2="184" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#10100f"/>
+                <stop offset="0.45" stop-color="#2b2b29"/>
+                <stop offset="1" stop-color="#0c0c0b"/>
+              </linearGradient>
+              <linearGradient id="strWhiteLink" x1="90" y1="88" x2="111" y2="132" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#faf7ef"/>
+                <stop offset="0.58" stop-color="#d9d5ca"/>
+                <stop offset="1" stop-color="#f4f0e7"/>
+              </linearGradient>
+              <linearGradient id="strDarkLink" x1="84" y1="130" x2="116" y2="184" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#343431"/>
+                <stop offset="1" stop-color="#121211"/>
+              </linearGradient>
+            </defs>
+            <line x1="16" y1="248" x2="184" y2="248" stroke="#383731" stroke-width="1"/>
+            <rect x="25" y="214" width="150" height="34" rx="2" style="fill:#241f18;stroke:#36312a;stroke-width:0.8"/>
+            <path d="M25 237 H175 V248 H25 Z" style="fill:#161411;opacity:0.75"/>
+            <rect x="36" y="217" width="65" height="25" rx="1" style="fill:#e2e1d8;stroke:#b8b5a8;stroke-width:0.5"/>
+            <rect x="39" y="220" width="8" height="8" rx="0.5" style="fill:#1c1c1a"/>
+            <rect x="90" y="220" width="8" height="8" rx="0.5" style="fill:#1c1c1a"/>
+            <rect x="39" y="231" width="8" height="8" rx="0.5" style="fill:#1c1c1a"/>
+            <rect x="90" y="231" width="8" height="8" rx="0.5" style="fill:#1c1c1a"/>
+            <rect x="41" y="222" width="3" height="3" style="fill:#dddcd3"/>
+            <rect x="93" y="223" width="3" height="3" style="fill:#dddcd3"/>
+            <rect x="42" y="234" width="3" height="3" style="fill:#dddcd3"/>
+            <rect x="92" y="233" width="3" height="3" style="fill:#dddcd3"/>
             <g class="str-cub">
-              <rect x="55" y="216" width="18" height="14" rx="1.5" style="fill:#8a3030"/>
-              <rect x="56" y="217" width="6" height="3" rx="0.5" style="fill:#b04040;opacity:0.55"/>
-              <rect x="55" y="228" width="18" height="2" rx="0.5" style="fill:#601a1a"/>
+              <path d="M47 205 L64 208 L64 223 L47 220 Z" style="fill:#8d3030"/>
+              <path d="M47 205 L55 200 L72 203 L64 208 Z" style="fill:#ba4a4a"/>
+              <path d="M64 208 L72 203 L72 218 L64 223 Z" style="fill:#682020"/>
+              <path d="M51 206 L58 204 L63 205 L56 207 Z" style="fill:#d06464;opacity:0.45"/>
             </g>
-            <!-- base shadow -->
-            <ellipse cx="100" cy="251" rx="24" ry="5" style="fill:#0d0d0b"/>
-            <!-- base plate -->
-            <rect x="77" y="240" width="46" height="10" rx="2" style="fill:#252523"/>
-            <!-- base cylinder -->
-            <rect x="86" y="220" width="28" height="22" rx="3" style="fill:#2c2c2a"/>
-            <line x1="86" y1="228" x2="114" y2="228" stroke="#383735" stroke-width="0.7"/>
-            <line x1="86" y1="234" x2="114" y2="234" stroke="#383735" stroke-width="0.7"/>
-            <!-- shoulder mount ring -->
-            <ellipse cx="100" cy="220" rx="16" ry="4" style="fill:#3a3a38"/>
-            <!-- ── KINEMATIC CHAIN ── -->
-            <!-- base yaw: lateral sweep simulates rotation perspective -->
-            <g class="str-base">
-              <!-- shoulder pivot (100,220) -->
-              <g class="str-shld" style="transform-origin:100px 220px">
-                <circle cx="100" cy="220" r="8" style="fill:#3c3c3a;stroke:#585854;stroke-width:1"/>
-                <circle cx="100" cy="220" r="3" style="fill:#7a7874"/>
-                <!-- upper arm link -->
-                <rect x="96.5" y="160" width="7" height="60" rx="2.5" style="fill:#e8e5de"/>
-                <rect x="98" y="168" width="4" height="22" rx="1" style="fill:#d4d1ca;opacity:0.4"/>
-                <!-- elbow pivot (100,160) -->
-                <g class="str-elbw" style="transform-origin:100px 160px">
-                  <circle cx="100" cy="160" r="6" style="fill:#3c3c3a;stroke:#585854;stroke-width:1"/>
-                  <circle cx="100" cy="160" r="2.5" style="fill:#7a7874"/>
-                  <!-- forearm link -->
-                  <rect x="97.5" y="120" width="5" height="40" rx="2" style="fill:#e8e5de"/>
-                  <rect x="98.5" y="126" width="3" height="14" rx="1" style="fill:#d4d1ca;opacity:0.4"/>
-                  <!-- wrist pitch pivot (100,120) -->
-                  <g class="str-wrp" style="transform-origin:100px 120px">
-                    <circle cx="100" cy="120" r="5" style="fill:#3c3c3a;stroke:#585854;stroke-width:1"/>
-                    <!-- wrist roll indicator: gold dot orbits around roll axis -->
-                    <g class="str-roll" style="transform-origin:100px 112px">
-                      <circle cx="100" cy="104" r="2.5" style="fill:#c8b97a;opacity:0.95"/>
-                      <circle cx="107" cy="108" r="1.5" style="fill:#5a5854;opacity:0.65"/>
-                      <circle cx="93"  cy="108" r="1.5" style="fill:#5a5854;opacity:0.65"/>
+            <g class="str-base" style="transform-origin:100px 222px">
+              <ellipse cx="100" cy="250" rx="36" ry="6" style="fill:#0d0d0b"/>
+              <rect x="69" y="222" width="62" height="11" rx="2" style="fill:#171716;stroke:#393833;stroke-width:0.8"/>
+              <circle cx="77" cy="226" r="1.6" style="fill:#5b5952"/>
+              <circle cx="123" cy="226" r="1.6" style="fill:#5b5952"/>
+              <path d="M80 188 H120 V222 H80 Z" style="fill:url(#strCyl)"/>
+              <ellipse cx="100" cy="188" rx="20" ry="6" style="fill:#383835;stroke:#5a5851;stroke-width:0.8"/>
+              <ellipse cx="100" cy="222" rx="20" ry="6" style="fill:#151514;stroke:#33322f;stroke-width:0.7"/>
+              <rect x="82" y="188" width="36" height="34" style="fill:#060606;opacity:0.18"/>
+              <rect x="82" y="198" width="10" height="16" rx="2" style="fill:#111110;stroke:#3b3934;stroke-width:0.7"/>
+              <rect x="84" y="201" width="6" height="3" rx="1" style="fill:#57b7c1;opacity:0.9"/>
+              <path d="M83 185 C84 174 90 167 100 167 C110 167 116 174 117 185 L108 185 C107 180 104 176 100 176 C96 176 93 180 92 185 Z" style="fill:#181817;stroke:#3f3e39;stroke-width:1"/>
+              <circle cx="100" cy="184" r="14" style="fill:#0f0f0e;stroke:#4e4c45;stroke-width:1.2"/>
+              <circle cx="100" cy="184" r="8" style="fill:#2f2f2c"/>
+              <g class="str-shld" style="transform-origin:100px 184px">
+                <path d="M88 181 L85 140 C85 133 90 129 97 129 H106 C113 129 116 134 114 141 L109 181 Z" style="fill:url(#strDarkLink);stroke:#57554d;stroke-width:1"/>
+                <path d="M101 132 H109 C114 134 116 139 114 145 L110 178 C106 176 102 173 99 169 Z" style="fill:#111110;opacity:0.42"/>
+                <path d="M91 145 L108 137" stroke="#5b5a54" stroke-width="0.8" opacity="0.7"/>
+                <circle cx="100" cy="184" r="10" style="fill:#20201e;stroke:#626057;stroke-width:1.2"/>
+                <circle cx="100" cy="184" r="4" style="fill:#6c6961"/>
+                <g class="str-elbw" style="transform-origin:100px 132px">
+                  <path d="M94 132 L90 98 C89 91 94 86 100 86 C106 86 111 91 110 98 L106 132 Z" style="fill:url(#strWhiteLink);stroke:#bcb8ad;stroke-width:1"/>
+                  <path d="M103 88 C109 91 111 96 109 103 L106 130" stroke="#ffffff" stroke-width="2" opacity="0.35"/>
+                  <circle cx="100" cy="132" r="11" style="fill:#171716;stroke:#56544d;stroke-width:1.1"/>
+                  <circle cx="100" cy="132" r="5" style="fill:#d8d4ca;stroke:#8b867d;stroke-width:0.7"/>
+                  <circle cx="96" cy="119" r="1.5" style="fill:#77746d"/>
+                  <circle cx="104" cy="96" r="1.5" style="fill:#77746d"/>
+                  <g class="str-wrp" style="transform-origin:100px 90px">
+                    <circle cx="100" cy="90" r="9" style="fill:#171716;stroke:#56544d;stroke-width:1.1"/>
+                    <rect x="88" y="78" width="24" height="15" rx="3" style="fill:#1d1d1b;stroke:#55534c;stroke-width:0.9"/>
+                    <g class="str-roll" style="transform-origin:100px 80px">
+                      <ellipse cx="100" cy="80" rx="11" ry="5" style="fill:#30302d;stroke:#68665e;stroke-width:0.8"/>
+                      <circle cx="109" cy="80" r="2.2" style="fill:#c8b97a"/>
+                      <circle cx="91" cy="80" r="1.4" style="fill:#77746d"/>
+                      <path d="M96 76 H104" stroke="#c8b97a" stroke-width="0.8" opacity="0.7"/>
                     </g>
-                    <!-- wrist mount link -->
-                    <rect x="98.5" y="106" width="3" height="14" rx="1.5" style="fill:#e8e5de"/>
-                    <!-- gripper palm block -->
-                    <rect x="93" y="96" width="14" height="10" rx="2" style="fill:#3c3c3a"/>
-                    <!-- left finger (pivot at palm right edge) -->
-                    <g class="str-gfl" style="transform-origin:93px 101px">
-                      <rect x="79" y="95" width="14" height="8" rx="2" style="fill:#f0ede6"/>
-                      <rect x="79" y="99" width="14" height="2" rx="1" style="fill:#c8b97a;opacity:0.28"/>
-                      <rect x="80" y="96" width="4" height="4" rx="1" style="fill:#d8d5ce"/>
+                    <rect x="94" y="91" width="12" height="10" rx="2" style="fill:#10100f;stroke:#494842;stroke-width:0.9"/>
+                    <rect x="88" y="101" width="24" height="13" rx="3" style="fill:#10100f;stroke:#494842;stroke-width:0.9"/>
+                    <circle cx="100" cy="108" r="4.5" style="fill:#252523;stroke:#626057;stroke-width:0.7"/>
+                    <g class="str-load">
+                      <path d="M94 120 L105 122 L105 133 L94 131 Z" style="fill:#8d3030"/>
+                      <path d="M94 120 L99 117 L110 119 L105 122 Z" style="fill:#ba4a4a"/>
+                      <path d="M105 122 L110 119 L110 130 L105 133 Z" style="fill:#682020"/>
                     </g>
-                    <!-- right finger (pivot at palm left edge) -->
-                    <g class="str-gfr" style="transform-origin:107px 101px">
-                      <rect x="107" y="95" width="14" height="8" rx="2" style="fill:#f0ede6"/>
-                      <rect x="107" y="99" width="14" height="2" rx="1" style="fill:#c8b97a;opacity:0.28"/>
-                      <rect x="117" y="96" width="4" height="4" rx="1" style="fill:#d8d5ce"/>
+                    <g class="str-gfl" style="transform-origin:91px 108px">
+                      <path d="M91 108 C82 113 77 120 74 129 L68 126 C70 114 78 104 90 99 Z" style="fill:#f3f0e8;stroke:#c5c1b7;stroke-width:0.9"/>
+                      <path d="M78 118 L88 106" stroke="#d8d4ca" stroke-width="2" stroke-linecap="round"/>
+                      <circle cx="85" cy="110" r="1.8" style="fill:#77746d"/>
                     </g>
-                    <!-- camera/sensor dot -->
-                    <circle cx="100" cy="93" r="2" style="fill:#c8b97a"/>
+                    <g class="str-gfr" style="transform-origin:109px 108px">
+                      <path d="M109 108 C118 113 123 120 126 129 L132 126 C130 114 122 104 110 99 Z" style="fill:#f3f0e8;stroke:#c5c1b7;stroke-width:0.9"/>
+                      <path d="M122 118 L112 106" stroke="#d8d4ca" stroke-width="2" stroke-linecap="round"/>
+                      <circle cx="115" cy="110" r="1.8" style="fill:#77746d"/>
+                    </g>
+                    <circle cx="100" cy="99" r="1.8" style="fill:#57b7c1;opacity:0.95"/>
                   </g><!-- /wrist pitch -->
                 </g><!-- /elbow -->
               </g><!-- /shoulder -->
-            </g><!-- /base scan -->
+            </g><!-- /base yaw -->
           </svg>
         </div>
 
