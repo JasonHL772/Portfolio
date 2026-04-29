@@ -81,7 +81,9 @@ nav {
 .hero {
   padding: 7rem 2rem 0;
   max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: flex-start; gap: 2rem;
 }
+.hero-text { flex: 0 0 auto; }
 .hero-name {
   font-family: var(--display);
   font-size: clamp(5rem, 12vw, 12rem);
@@ -404,10 +406,10 @@ nav {
   display: flex; flex-direction: column; gap: 0.65rem;
   cursor: none; text-decoration: none; color: inherit;
   transition: background 0.25s, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  transform-origin: top left;
+  position: relative; z-index: 1;
+  transform-origin: top center;
 }
-.sv-card:hover { transform: scale(1.04); }
+.sv-card:hover { transform: scale(1.04); z-index: 2; }
 .sv-card::after {
   content: '→';
   position: absolute; bottom: 1.5rem; right: 1.5rem;
@@ -437,12 +439,107 @@ footer {
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);
 }
 
+/* ── HERO VIZ ── */
+.hero-viz {
+  flex: 1; min-width: 0;
+  padding-top: 3rem;
+  position: relative;
+  min-height: 320px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.rv-panels { position: relative; width: 100%; max-width: 210px; height: 270px; }
+.rv-panel {
+  position: absolute; inset: 0;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.7s ease;
+  cursor: pointer;
+  display: flex; flex-direction: column; align-items: center;
+}
+.rv-panel.active { opacity: 1; pointer-events: auto; }
+.rv-svg { width: 100%; height: 270px; }
+.rv-label { margin-top: 0.6rem; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.rv-name {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint);
+  transition: color 0.2s;
+}
+.rv-panel.active:hover ~ .rv-label .rv-name { color: var(--accent); }
+.rv-dots { display: flex; gap: 5px; }
+.rv-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--faint); transition: background 0.3s; }
+.rv-dot.active { background: var(--accent); }
+
+/* ── ROBOT ANIMATIONS ── */
+/* STRYKER - pick and place */
+.str-arm   { animation: strArm   10s cubic-bezier(.4,0,.6,1) infinite; }
+.str-elbow { animation: strElbow 10s cubic-bezier(.4,0,.6,1) infinite; }
+.str-wrist { animation: strWrist 10s cubic-bezier(.4,0,.6,1) infinite; }
+.str-fl    { animation: strFl    10s ease-in-out infinite; }
+.str-fr    { animation: strFr    10s ease-in-out infinite; }
+.str-blkL  { animation: strBlkL 10s ease-in-out infinite; }
+.str-blkR  { animation: strBlkR 10s ease-in-out infinite; }
+@keyframes strArm   { 0%,8%{transform:rotate(0deg)} 22%{transform:rotate(-22deg)} 45%{transform:rotate(-22deg)} 60%{transform:rotate(18deg)} 80%{transform:rotate(18deg)} 95%,100%{transform:rotate(0deg)} }
+@keyframes strElbow { 0%,8%{transform:rotate(8deg)} 22%{transform:rotate(26deg)} 45%{transform:rotate(26deg)} 60%{transform:rotate(20deg)} 80%{transform:rotate(20deg)} 95%,100%{transform:rotate(8deg)} }
+@keyframes strWrist { 0%,8%{transform:rotate(-6deg)} 22%{transform:rotate(-22deg)} 45%{transform:rotate(-22deg)} 60%{transform:rotate(-16deg)} 80%{transform:rotate(-16deg)} 95%,100%{transform:rotate(-6deg)} }
+@keyframes strFl    { 0%,20%{transform:rotate(-18deg)} 30%{transform:rotate(0deg)} 78%{transform:rotate(0deg)} 86%{transform:rotate(-18deg)} 100%{transform:rotate(-18deg)} }
+@keyframes strFr    { 0%,20%{transform:rotate(18deg)}  30%{transform:rotate(0deg)} 78%{transform:rotate(0deg)} 86%{transform:rotate(18deg)}  100%{transform:rotate(18deg)} }
+@keyframes strBlkL  { 0%,27%{opacity:1} 35%{opacity:0} 100%{opacity:0} }
+@keyframes strBlkR  { 0%,80%{opacity:0} 88%{opacity:1} 100%{opacity:1} }
+
+/* SENTINEL - balancing wobble */
+.sen-body { animation: senBalance 2.8s ease-in-out infinite; }
+@keyframes senBalance {
+  0%,100%{ transform:rotate(0deg) translateX(0); }
+  22%    { transform:rotate(-5deg) translateX(-5px); }
+  55%    { transform:rotate(5deg) translateX(5px); }
+  78%    { transform:rotate(-2deg) translateX(-2px); }
+}
+
+/* RANGER - drive, detect, turn */
+.rng-body { animation: rngDrive 10s ease-in-out infinite; }
+.rng-lwhl { animation: rngWheel 0.9s linear infinite; }
+.rng-rwhl { animation: rngWheel 0.9s linear infinite; }
+.rng-wall { animation: rngWall  10s ease-in-out infinite; }
+.rng-ping { animation: rngPing  10s ease-in-out infinite; }
+.rng-ping2{ animation: rngPing  10s ease-in-out 0.45s infinite; }
+@keyframes rngDrive { 0%{transform:translateX(-35px) rotate(0deg)} 38%{transform:translateX(12px) rotate(0deg)} 55%{transform:translateX(12px) rotate(0deg)} 70%{transform:translateX(12px) rotate(-18deg)} 85%{transform:translateX(-10px) rotate(-18deg)} 95%,100%{transform:translateX(-35px) rotate(0deg)} }
+@keyframes rngWheel { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes rngWall  { 0%,36%{opacity:0} 44%{opacity:1} 68%{opacity:1} 76%{opacity:0} 100%{opacity:0} }
+@keyframes rngPing  { 0%,42%{transform:scale(1);opacity:0} 46%{transform:scale(1);opacity:0.9} 58%{transform:scale(4);opacity:0} 100%{transform:scale(1);opacity:0} }
+
+/* LEONARDO - progressive drawing */
+.leo-l1  { animation: leoL1   10s ease-in-out infinite; }
+.leo-l2  { animation: leoL2   10s ease-in-out infinite; }
+.leo-ee  { animation: leoEE   10s ease-in-out infinite; }
+.leo-draw{ animation: leoDraw 10s ease-in-out infinite; }
+@keyframes leoL1   { 0%,5%{transform:rotate(-5deg)} 30%{transform:rotate(22deg)} 60%{transform:rotate(35deg)} 85%{transform:rotate(10deg)} 100%{transform:rotate(-5deg)} }
+@keyframes leoL2   { 0%,5%{transform:rotate(25deg)} 30%{transform:rotate(-18deg)} 60%{transform:rotate(-34deg)} 85%{transform:rotate(-5deg)} 100%{transform:rotate(25deg)} }
+@keyframes leoEE   { 0%,5%{transform:rotate(-10deg)} 30%{transform:rotate(8deg)} 60%{transform:rotate(18deg)} 85%{transform:rotate(-2deg)} 100%{transform:rotate(-10deg)} }
+@keyframes leoDraw { 0%,3%{stroke-dashoffset:320;opacity:.7} 85%{stroke-dashoffset:0;opacity:.7} 92%{stroke-dashoffset:0;opacity:0} 97%{stroke-dashoffset:320;opacity:0} 100%{stroke-dashoffset:320;opacity:.7} }
+
+/* PATHFINDER - line following (CSS Motion Path) */
+.pf-bot {
+  offset-path: path("M42 200 Q22 200 22 180 L22 95 Q22 75 42 75 L158 75 Q178 75 178 95 L178 180 Q178 200 158 200 Z");
+  offset-distance: 0%; offset-rotate: auto;
+  animation: pfDrive 6s linear infinite;
+}
+@keyframes pfDrive { from{offset-distance:0%} to{offset-distance:100%} }
+
+/* FORKRUNNER - lift and carry */
+.frk-bot   { animation: frkBot   10s ease-in-out infinite; }
+.frk-forks { animation: frkForks 10s ease-in-out infinite; }
+.frk-crate { animation: frkCrate 10s ease-in-out infinite; }
+@keyframes frkBot   { 0%{transform:translateX(0)} 20%{transform:translateX(20px)} 48%{transform:translateX(20px)} 65%{transform:translateX(-35px)} 80%{transform:translateX(-35px)} 95%,100%{transform:translateX(0)} }
+@keyframes frkForks { 0%,18%{transform:translateY(0)} 26%{transform:translateY(12px)} 38%{transform:translateY(12px)} 48%{transform:translateY(-22px)} 75%{transform:translateY(-22px)} 83%{transform:translateY(0)} 100%{transform:translateY(0)} }
+@keyframes frkCrate { 0%,36%{transform:translate(0,0)} 48%{transform:translate(0,-28px)} 63%{transform:translate(-55px,-28px)} 78%{transform:translate(-55px,0)} 90%{transform:translate(-55px,0)} 96%{transform:translate(0,0)} 100%{transform:translate(0,0)} }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 700px) {
   nav { padding: 0 1.25rem; }
   .hero, .timeline-section, .menu-section, .home-bottom, .detail-wrap {
     padding-left: 1.25rem; padding-right: 1.25rem;
   }
+  .hero { flex-direction: column; }
+  .hero-viz { width: 100%; padding-top: 1.5rem; min-height: 280px; }
   .menu-header, .menu-row { grid-template-columns: 2.5rem 1fr; }
   .menu-header span:nth-child(3), .menu-type { display: none; }
   .sv-grid { grid-template-columns: 1fr; }
@@ -469,8 +566,201 @@ footer {
 <div id="home" class="page active">
 
   <div class="hero">
-    <h1 class="hero-name"><span class="nl" style="animation-delay:1.0s">J</span><span class="nl" style="animation-delay:1.2s">A</span><span class="nl" style="animation-delay:1.4s">S</span><span class="nl" style="animation-delay:1.6s">O</span><span class="nl" style="animation-delay:1.8s">N</span><br><span class="nl" style="animation-delay:2.0s">H</span><span class="nl" style="animation-delay:2.2s">E</span><span class="nl" style="animation-delay:2.4s">R</span><span class="nl" style="animation-delay:2.6s">N</span><span class="nl" style="animation-delay:2.8s">A</span><span class="nl" style="animation-delay:3.0s">N</span><span class="nl" style="animation-delay:3.2s">D</span><span class="nl" style="animation-delay:3.4s">E</span><span class="nl" style="animation-delay:3.6s">Z</span><br><span class="nl" style="animation-delay:3.8s">L</span><span class="nl" style="animation-delay:4.0s">O</span><span class="nl" style="animation-delay:4.2s">P</span><span class="nl" style="animation-delay:4.4s">E</span><span class="nl" style="animation-delay:4.6s">Z</span><span class="hero-dot">.</span></h1>
-    <p class="hero-sub">Robotics Engineer · University of Michigan — Ann Arbor · Class of 2027</p>
+    <div class="hero-text">
+      <h1 class="hero-name"><span class="nl" style="animation-delay:1.0s">J</span><span class="nl" style="animation-delay:1.2s">A</span><span class="nl" style="animation-delay:1.4s">S</span><span class="nl" style="animation-delay:1.6s">O</span><span class="nl" style="animation-delay:1.8s">N</span><br><span class="nl" style="animation-delay:2.0s">H</span><span class="nl" style="animation-delay:2.2s">E</span><span class="nl" style="animation-delay:2.4s">R</span><span class="nl" style="animation-delay:2.6s">N</span><span class="nl" style="animation-delay:2.8s">A</span><span class="nl" style="animation-delay:3.0s">N</span><span class="nl" style="animation-delay:3.2s">D</span><span class="nl" style="animation-delay:3.4s">E</span><span class="nl" style="animation-delay:3.6s">Z</span><br><span class="nl" style="animation-delay:3.8s">L</span><span class="nl" style="animation-delay:4.0s">O</span><span class="nl" style="animation-delay:4.2s">P</span><span class="nl" style="animation-delay:4.4s">E</span><span class="nl" style="animation-delay:4.6s">Z</span><span class="hero-dot">.</span></h1>
+      <p class="hero-sub">Robotics Engineer · University of Michigan — Ann Arbor · Class of 2027</p>
+    </div>
+
+    <!-- ── ROBOT SHOWCASE ── -->
+    <div class="hero-viz">
+      <div class="rv-panels">
+
+        <!-- STRYKER: 6-DOF arm pick and place -->
+        <div class="rv-panel active" onclick="show('stryker')">
+          <svg class="rv-svg" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="15" y1="248" x2="185" y2="248" stroke="#383731" stroke-width="1"/>
+            <rect class="str-blkL" x="33" y="232" width="20" height="16" rx="2" style="fill:#8a3030"/>
+            <rect class="str-blkR" x="145" y="232" width="20" height="16" rx="2" style="fill:#8a3030;opacity:0"/>
+            <ellipse cx="100" cy="248" rx="32" ry="9" style="fill:#1a1a17"/>
+            <rect x="85" y="234" width="30" height="16" rx="3" style="fill:#6a6860"/>
+            <ellipse cx="100" cy="234" rx="17" ry="5" style="fill:#9c9890"/>
+            <circle cx="100" cy="234" r="7" style="fill:#9c9890"/>
+            <g class="str-arm" style="transform-origin:100px 234px">
+              <rect x="96" y="170" width="8" height="64" rx="3" style="fill:#f0ede6"/>
+              <circle cx="100" cy="170" r="6" style="fill:#9c9890"/>
+              <g class="str-elbow" style="transform-origin:100px 170px">
+                <rect x="97" y="122" width="6" height="48" rx="2" style="fill:#f0ede6"/>
+                <circle cx="100" cy="122" r="5" style="fill:#9c9890"/>
+                <g class="str-wrist" style="transform-origin:100px 122px">
+                  <rect x="98" y="106" width="4" height="16" rx="1" style="fill:#f0ede6"/>
+                  <rect class="str-fl" x="89" y="97" width="10" height="11" rx="2" style="fill:#f0ede6;transform-origin:98px 108px"/>
+                  <rect class="str-fr" x="101" y="97" width="10" height="11" rx="2" style="fill:#f0ede6;transform-origin:102px 108px"/>
+                  <circle cx="100" cy="95" r="2.5" style="fill:#c8b97a"/>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- SENTINEL: ball-balancing robot -->
+        <div class="rv-panel" onclick="show('sentinel')">
+          <svg class="rv-svg" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="210" r="48" style="fill:#1a1a17;stroke:#383731;stroke-width:1.5"/>
+            <path d="M57 196 Q100 185 143 196" stroke="#383731" stroke-width="1.2" fill="none"/>
+            <path d="M58 224 Q100 235 142 224" stroke="#383731" stroke-width="1.2" fill="none"/>
+            <line x1="100" y1="162" x2="100" y2="258" stroke="#383731" stroke-width="1.2"/>
+            <g class="sen-body" style="transform-origin:100px 162px">
+              <ellipse cx="100" cy="162" rx="44" ry="12" style="fill:#1a1a17;stroke:#383731;stroke-width:1.5"/>
+              <ellipse cx="58" cy="167" rx="9" ry="15" style="fill:#6a6860;stroke:#9c9890;stroke-width:1.5"/>
+              <ellipse cx="142" cy="167" rx="9" ry="15" style="fill:#6a6860;stroke:#9c9890;stroke-width:1.5"/>
+              <ellipse cx="100" cy="152" rx="7" ry="11" style="fill:#6a6860;stroke:#9c9890;stroke-width:1"/>
+              <rect x="70" y="78" width="6" height="86" rx="2" style="fill:#9c9890"/>
+              <rect x="124" y="78" width="6" height="86" rx="2" style="fill:#9c9890"/>
+              <rect x="70" y="76" width="60" height="8" rx="2" style="fill:#9c9890"/>
+              <rect x="70" y="130" width="60" height="6" rx="2" style="fill:#9c9890"/>
+              <rect x="76" y="84" width="48" height="48" rx="2" style="fill:#131311;stroke:#252522;stroke-width:1"/>
+              <rect x="76" y="84" width="48" height="5" rx="1" style="fill:#c8b97a;opacity:0.7"/>
+              <rect x="76" y="127" width="48" height="5" rx="1" style="fill:#c8b97a;opacity:0.7"/>
+              <rect x="83" y="96" width="14" height="10" rx="1" style="fill:#6a6860"/>
+              <rect x="103" y="96" width="14" height="10" rx="1" style="fill:#6a6860"/>
+              <rect x="83" y="112" width="34" height="7" rx="1" style="fill:#252522"/>
+              <rect x="78" y="68" width="44" height="12" rx="3" style="fill:#6a6860"/>
+              <circle cx="90" cy="74" r="3" style="fill:#131311"/>
+              <circle cx="100" cy="74" r="3" style="fill:#131311"/>
+              <circle cx="110" cy="74" r="3" style="fill:#131311"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- RANGER: diff drive with sensors -->
+        <div class="rv-panel" onclick="show('ranger')">
+          <svg class="rv-svg" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="228" x2="190" y2="228" stroke="#383731" stroke-width="1"/>
+            <rect class="rng-wall" x="163" y="184" width="8" height="44" rx="1" style="fill:#6a6860;opacity:0"/>
+            <circle class="rng-ping"  cx="148" cy="196" r="5" style="stroke:#c8b97a;stroke-width:1;fill:none;opacity:0;transform-origin:148px 196px"/>
+            <circle class="rng-ping2" cx="148" cy="208" r="5" style="stroke:#c8b97a;stroke-width:0.8;fill:none;opacity:0;transform-origin:148px 208px"/>
+            <g class="rng-body" style="transform-origin:90px 203px">
+              <rect x="45" y="180" width="90" height="44" rx="6" style="fill:#3a5fa0;opacity:0.9"/>
+              <rect x="45" y="180" width="90" height="12" rx="6" style="fill:#4a72b8;opacity:0.7"/>
+              <circle cx="63" cy="228" r="19" style="fill:#1a1a17;stroke:#6a6860;stroke-width:2.5"/>
+              <circle cx="63" cy="228" r="7" style="fill:#6a6860"/>
+              <circle cx="117" cy="228" r="19" style="fill:#1a1a17;stroke:#6a6860;stroke-width:2.5"/>
+              <circle cx="117" cy="228" r="7" style="fill:#6a6860"/>
+              <g class="rng-lwhl" style="transform-origin:63px 228px">
+                <line x1="63" y1="209" x2="63" y2="247" stroke="#9c9890" stroke-width="1.5"/>
+                <line x1="44" y1="228" x2="82" y2="228" stroke="#9c9890" stroke-width="1.5"/>
+              </g>
+              <g class="rng-rwhl" style="transform-origin:117px 228px">
+                <line x1="117" y1="209" x2="117" y2="247" stroke="#9c9890" stroke-width="1.5"/>
+                <line x1="98" y1="228" x2="136" y2="228" stroke="#9c9890" stroke-width="1.5"/>
+              </g>
+              <rect x="28" y="187" width="20" height="24" rx="2" style="fill:#131311;stroke:#252522;stroke-width:1"/>
+              <rect x="28" y="187" width="20" height="4" style="fill:#c8b97a;opacity:0.6"/>
+              <rect x="73" y="163" width="30" height="19" rx="3" style="fill:#1a1a17;stroke:#383731;stroke-width:1"/>
+              <circle cx="88" cy="172" r="6" style="fill:#252522"/>
+              <circle cx="88" cy="172" r="3.5" style="fill:#383731"/>
+              <circle cx="88" cy="172" r="1.5" style="fill:#9c9890"/>
+              <rect x="133" y="190" width="7" height="10" rx="1" style="fill:#9c9890"/>
+              <rect x="133" y="204" width="7" height="10" rx="1" style="fill:#9c9890"/>
+              <circle cx="137" cy="195" r="3" style="fill:#6a6860"/>
+              <circle cx="137" cy="209" r="3" style="fill:#6a6860"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- LEONARDO: drawing arm -->
+        <div class="rv-panel" onclick="show('leonardo')">
+          <svg class="rv-svg" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="162" y="20" width="18" height="230" rx="2" style="fill:#1a1a17;stroke:#383731;stroke-width:1"/>
+            <rect x="18" y="48" width="122" height="158" rx="2" style="fill:#f0ede6;opacity:0.08;stroke:#383731;stroke-width:1"/>
+            <path class="leo-draw" d="M43 78 Q93 63 113 108 Q128 148 86 168 Q46 184 40 146 Q35 110 64 116 Q88 120 90 148"
+              style="stroke:#f0ede6;stroke-width:1.5;fill:none;opacity:0.7" stroke-dasharray="320" stroke-dashoffset="320"/>
+            <circle cx="162" cy="135" r="8" style="fill:#6a6860"/>
+            <g class="leo-l1" style="transform-origin:162px 135px">
+              <rect x="108" y="131.5" width="56" height="7" rx="2.5" style="fill:#9c9890"/>
+              <circle cx="162" cy="135" r="5" style="fill:#6a6860"/>
+              <circle cx="108" cy="135" r="5" style="fill:#6a6860"/>
+              <g class="leo-l2" style="transform-origin:108px 135px">
+                <rect x="60" y="132" width="50" height="6" rx="2" style="fill:#9c9890"/>
+                <circle cx="108" cy="135" r="4" style="fill:#6a6860"/>
+                <circle cx="60" cy="135" r="4" style="fill:#6a6860"/>
+                <g class="leo-ee" style="transform-origin:60px 135px">
+                  <rect x="57.5" y="135" width="5" height="20" rx="1.5" style="fill:#f0ede6"/>
+                  <polygon points="57.5,155 62.5,155 60,162" style="fill:#c8b97a"/>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- PATHFINDER: line follower (CSS Motion Path) -->
+        <div class="rv-panel" onclick="show('pathfinder')">
+          <svg class="rv-svg" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="15" width="190" height="235" rx="4" style="fill:#1a1a17;opacity:0.5;stroke:#252522;stroke-width:1"/>
+            <path d="M42 200 Q22 200 22 180 L22 95 Q22 75 42 75 L158 75 Q178 75 178 95 L178 180 Q178 200 158 200 Z"
+              style="stroke:#f0ede6;stroke-width:5;fill:none;opacity:0.45"/>
+            <g class="pf-bot">
+              <rect x="-18" y="-13" width="36" height="26" rx="4" style="fill:#c8a832"/>
+              <rect x="-18" y="-13" width="36" height="7" rx="2" style="fill:#3a5fa0"/>
+              <rect x="-18" y="6"  width="36" height="7" rx="2" style="fill:#3a5fa0"/>
+              <rect x="-9"  y="-7" width="18" height="14" rx="1.5" style="fill:#1a1a17;stroke:#383731;stroke-width:1"/>
+              <rect x="-13" y="-17" width="26" height="5" rx="1" style="fill:#6a6860"/>
+              <circle cx="-6" cy="-14.5" r="1.5" style="fill:#c8b97a"/>
+              <circle cx="0"  cy="-14.5" r="1.5" style="fill:#c8b97a"/>
+              <circle cx="6"  cy="-14.5" r="1.5" style="fill:#c8b97a"/>
+              <rect x="-22" y="-10" width="6" height="20" rx="2" style="fill:#252522;stroke:#383731;stroke-width:1"/>
+              <rect x="16"  y="-10" width="6" height="20" rx="2" style="fill:#252522;stroke:#383731;stroke-width:1"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- FORKRUNNER: forklift -->
+        <div class="rv-panel" onclick="show('forkrunner')">
+          <svg class="rv-svg" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="230" x2="190" y2="230" stroke="#383731" stroke-width="1"/>
+            <g class="frk-crate" style="transform-origin:159px 216px">
+              <rect x="143" y="204" width="32" height="26" rx="2" style="fill:#1a1a17;stroke:#6a6860;stroke-width:1.5"/>
+              <line x1="154" y1="204" x2="154" y2="230" stroke="#383731" stroke-width="1"/>
+              <line x1="164" y1="204" x2="164" y2="230" stroke="#383731" stroke-width="1"/>
+              <line x1="143" y1="216" x2="175" y2="216" stroke="#383731" stroke-width="1"/>
+            </g>
+            <g class="frk-bot" style="transform-origin:82px 212px">
+              <rect x="22" y="187" width="118" height="45" rx="3" style="fill:#9c9890"/>
+              <rect x="22" y="187" width="118" height="10" rx="3" style="fill:#f0ede6;opacity:0.3"/>
+              <circle cx="42" cy="230" r="16" style="fill:#1a1a17;stroke:#6a6860;stroke-width:2"/>
+              <circle cx="42" cy="230" r="6" style="fill:#6a6860"/>
+              <circle cx="112" cy="230" r="18" style="fill:#4a7a20;stroke:#2a5010;stroke-width:1.5"/>
+              <circle cx="112" cy="230" r="6" style="fill:#6a6860"/>
+              <circle cx="75" cy="202" r="18" style="fill:none;stroke:#6a6860;stroke-width:2"/>
+              <circle cx="75" cy="202" r="14" style="fill:none;stroke:#4a7a20;stroke-width:3;opacity:0.7"/>
+              <circle cx="75" cy="202" r="8" style="fill:none;stroke:#6a6860;stroke-width:1.5"/>
+              <circle cx="95" cy="202" r="12" style="fill:none;stroke:#6a6860;stroke-width:1.5"/>
+              <circle cx="75" cy="202" r="3" style="fill:#6a6860"/>
+              <circle cx="95" cy="202" r="3" style="fill:#6a6860"/>
+              <rect x="133" y="160" width="9" height="72" rx="2" style="fill:#6a6860"/>
+              <rect x="22" y="197" width="118" height="4" style="fill:#c8b97a;opacity:0.4"/>
+              <g class="frk-forks" style="transform-origin:138px 220px">
+                <rect x="133" y="216" width="40" height="5" rx="1.5" style="fill:#9c9890"/>
+                <rect x="133" y="224" width="40" height="5" rx="1.5" style="fill:#9c9890"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+      </div><!-- /rv-panels -->
+      <div class="rv-label">
+        <span class="rv-name" id="rvName">STRYKER</span>
+        <div class="rv-dots" id="rvDots">
+          <span class="rv-dot active"></span>
+          <span class="rv-dot"></span>
+          <span class="rv-dot"></span>
+          <span class="rv-dot"></span>
+          <span class="rv-dot"></span>
+          <span class="rv-dot"></span>
+        </div>
+      </div>
+    </div><!-- /hero-viz -->
+
   </div>
 
   <!-- TIMELINE -->
@@ -1032,6 +1322,23 @@ footer {
     if (e) e.preventDefault();
     show('home');
   }
+
+  // Robot showcase cycling
+  (function(){
+    const panels = document.querySelectorAll('.rv-panel');
+    const dots   = document.querySelectorAll('.rv-dot');
+    const nameEl = document.getElementById('rvName');
+    const names  = ['STRYKER','SENTINEL','RANGER','LEONARDO','PATHFINDER','FORKRUNNER'];
+    let cur = 0;
+    setInterval(function(){
+      panels[cur].classList.remove('active');
+      dots[cur].classList.remove('active');
+      cur = (cur + 1) % panels.length;
+      panels[cur].classList.add('active');
+      dots[cur].classList.add('active');
+      nameEl.textContent = names[cur];
+    }, 10000);
+  })();
 </script>
 </body>
 </html>
