@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jason Hernandez Lopez â Robotics Engineer</title>
+<title>Jason Hernandez Lopez — Robotics Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,12 +12,12 @@
   --bg: #0d0d0b;
   --surface: #131311;
   --surface2: #1a1a17;
-  --text: #e8e6df;
-  --muted: #7a7870;
-  --faint: #3f3e38;
+  --text: #f0ede6;
+  --muted: #9c9890;
+  --faint: #6a6860;
   --accent: #c8b97a;
-  --border: #222220;
-  --border2: #2e2d29;
+  --border: #252522;
+  --border2: #383731;
   --mono: 'DM Mono', monospace;
   --display: 'Bebas Neue', Impact, sans-serif;
   --sans: 'DM Sans', sans-serif;
@@ -28,13 +28,13 @@ body {
   font-family: var(--sans);
   background: var(--bg);
   color: var(--text);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   cursor: none;
 }
 
-/* ── CUSTOM CURSOR ── */
+/* ── CURSOR ── */
 .cursor {
   position: fixed;
   width: 8px; height: 8px;
@@ -77,34 +77,24 @@ nav {
 .page { display: none; }
 .page.active { display: block; }
 
-/* ────────────────────────────────
-   HOME
-──────────────────────────────── */
-
-/* HERO */
+/* ── HERO ── */
 .hero {
   padding: 7rem 2rem 0;
-  max-width: 1200px; margin: 0 auto;
-  position: relative;
-  overflow: hidden;
+  max-width: 1100px; margin: 0 auto;
 }
-
 .hero-name {
   font-family: var(--display);
-  font-size: clamp(5rem, 13vw, 13rem);
+  font-size: clamp(5rem, 12vw, 12rem);
   line-height: 0.88;
   letter-spacing: 0.01em;
   color: var(--text);
   animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-  position: relative;
-  z-index: 2;
 }
 .hero-name span { color: var(--accent); }
-
 .hero-sub {
   font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
   margin-top: 1rem;
@@ -113,44 +103,30 @@ nav {
 
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-/* ── TIMELINE ── */
-.timeline-section {
-  max-width: 1200px; margin: 0 auto;
-  padding: 3.5rem 2rem 0;
-  animation: fadeIn 1s 0.3s both;
-}
-
 @keyframes fadeIn {
   from { opacity: 0; } to { opacity: 1; }
 }
 
+/* ── TIMELINE ── */
+.timeline-section {
+  max-width: 820px; margin: 0 auto;
+  padding: 3.5rem 2rem 0;
+  animation: fadeIn 1s 0.3s both;
+}
 .timeline-label {
   font-family: var(--mono); font-size: 9px;
   letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--faint); margin-bottom: 1.5rem;
+  color: var(--faint); margin-bottom: 1.25rem;
 }
-
-.timeline {
-  position: relative;
-  padding-bottom: 1rem;
-}
-
-/* horizontal track */
 .tl-track {
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: 0;
-  overflow-x: auto;
+  overflow: hidden;
   padding-bottom: 1rem;
-  scrollbar-width: none;
 }
-.tl-track::-webkit-scrollbar { display: none; }
-
-/* connecting line */
 .tl-track::before {
   content: '';
   position: absolute;
@@ -159,28 +135,23 @@ nav {
   background: var(--border2);
   z-index: 0;
 }
-
 .tl-node {
-  flex: 0 0 auto;
+  flex: 1 1 0;
+  min-width: 0;
   position: relative;
   padding-top: 1.5rem;
-  min-width: 160px;
-  padding-right: 1rem;
+  padding-right: 0.5rem;
   animation: nodeIn 0.5s both;
 }
-
 .tl-node:nth-child(1) { animation-delay: 0.4s; }
 .tl-node:nth-child(2) { animation-delay: 0.55s; }
 .tl-node:nth-child(3) { animation-delay: 0.7s; }
 .tl-node:nth-child(4) { animation-delay: 0.85s; }
 .tl-node:nth-child(5) { animation-delay: 1.0s; }
-.tl-node:nth-child(6) { animation-delay: 1.15s; }
-
 @keyframes nodeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 .tl-dot {
   position: absolute;
   top: 0; left: 0;
@@ -191,48 +162,44 @@ nav {
   z-index: 1;
   transition: border-color 0.3s, background 0.3s;
 }
-.tl-node:hover .tl-dot {
-  border-color: var(--accent);
-  background: var(--accent);
-}
+.tl-node:hover .tl-dot { border-color: var(--accent); background: var(--accent); }
 .tl-dot.now {
   border-color: var(--accent);
   background: var(--accent);
   box-shadow: 0 0 8px rgba(200,185,122,0.4);
 }
-
 .tl-date {
   font-family: var(--mono); font-size: 9px;
-  letter-spacing: 0.1em; text-transform: uppercase;
+  letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--faint); margin-bottom: 4px;
 }
 .tl-role {
-  font-size: 12px; font-weight: 500;
+  font-size: 11px; font-weight: 500;
   color: var(--text); line-height: 1.3;
   margin-bottom: 2px;
+  overflow-wrap: break-word;
 }
 .tl-place {
-  font-family: var(--mono); font-size: 10px;
+  font-family: var(--mono); font-size: 9px;
   color: var(--muted);
+  overflow-wrap: break-word;
 }
 
-/* ── MENU DIVIDER ── */
+/* ── PROJECT MENU ── */
 .menu-section {
-  max-width: 1200px; margin: 3.5rem auto 0;
+  max-width: 820px; margin: 3rem auto 0;
   padding: 0 2rem;
   animation: fadeIn 1s 0.5s both;
 }
-
 .menu-section-label {
   font-family: var(--mono); font-size: 9px;
   letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--faint); margin-bottom: 1.25rem;
 }
-
 .menu-header {
   display: grid;
-  grid-template-columns: 3rem 1fr 8rem 14rem;
-  padding: 0.6rem 0;
+  grid-template-columns: 2.5rem 1fr 9rem;
+  padding: 0.5rem 0;
   border-bottom: 1px solid var(--border);
 }
 .menu-header span {
@@ -240,12 +207,10 @@ nav {
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--faint);
 }
-
 .menu-row {
   display: grid;
-  grid-template-columns: 3rem 1fr 8rem 14rem;
+  grid-template-columns: 2.5rem 1fr 9rem;
   align-items: center;
-  padding: 0 0;
   border-bottom: 1px solid var(--border);
   cursor: none;
   text-decoration: none;
@@ -254,12 +219,9 @@ nav {
   overflow: hidden;
   transition: border-color 0.3s;
 }
-
-/* fill sweep on hover */
 .menu-row::before {
   content: '';
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background: var(--surface2);
   transform: scaleX(0);
   transform-origin: left;
@@ -268,69 +230,69 @@ nav {
 }
 .menu-row:hover::before { transform: scaleX(1); }
 .menu-row:hover { border-color: var(--border2); }
-.menu-row:hover .menu-pname { color: var(--accent); letter-spacing: 0.005em; }
-.menu-row:hover .menu-arrow { opacity: 1; transform: translateX(0); }
+.menu-row:hover .menu-pname { color: var(--accent); }
 .menu-row:hover .menu-num { color: var(--accent); }
-
+.menu-row:hover .menu-arrow { opacity: 1; transform: translateX(0); }
 .menu-row > * { position: relative; z-index: 1; }
-
-.menu-row-inner {
-  padding: 1.1rem 0;
-}
 
 .menu-num {
   font-family: var(--mono); font-size: 10px;
   color: var(--faint); letter-spacing: 0.06em;
   transition: color 0.3s;
-  padding: 1.1rem 0;
+  padding: 1rem 0;
+  align-self: start;
 }
-
+.menu-row-inner { padding: 1rem 0; }
 .menu-pname {
   font-family: var(--display);
-  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-size: clamp(1.5rem, 2.2vw, 2.1rem);
   line-height: 1.0;
   color: var(--text);
   letter-spacing: 0.03em;
-  transition: color 0.3s, letter-spacing 0.3s;
+  transition: color 0.3s;
 }
 .menu-psub {
   font-family: var(--sans); font-size: 11px;
   color: var(--muted); display: block;
-  padding-top: 3px; letter-spacing: 0;
+  padding-top: 2px;
 }
-
-.menu-type {
-  font-family: var(--mono); font-size: 10px;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--faint);
-}
-
-.menu-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.menu-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
 .mtag {
   font-family: var(--mono); font-size: 9px;
-  letter-spacing: 0.05em; text-transform: uppercase;
+  letter-spacing: 0.04em; text-transform: uppercase;
   border: 1px solid var(--border2);
-  color: var(--muted);
+  color: var(--faint);
   padding: 2px 6px;
 }
-
+.menu-type {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--muted);
+  padding-right: 2rem;
+  align-self: start;
+  padding-top: 1.1rem;
+}
 .menu-arrow {
-  position: absolute; right: 1rem;
+  position: absolute; right: 0.75rem;
+  top: 50%; transform: translateY(-50%) translateX(-8px);
   font-family: var(--mono); font-size: 12px;
   color: var(--accent);
-  opacity: 0; transform: translateX(-8px);
+  opacity: 0;
   transition: opacity 0.3s, transform 0.3s;
 }
+.menu-row:hover .menu-arrow {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
 
-/* ── HOME BOTTOM ── */
+/* ── CONTACT STRIP ── */
 .home-bottom {
-  max-width: 1200px; margin: 3.5rem auto 0;
-  padding: 0 2rem 5rem;
+  max-width: 820px; margin: 3.5rem auto 0;
+  padding: 2.5rem 2rem 5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 2rem;
   border-top: 1px solid var(--border);
-  padding-top: 2.5rem;
   animation: fadeIn 1s 0.7s both;
 }
 .hb-block { display: flex; flex-direction: column; gap: 6px; }
@@ -343,14 +305,11 @@ nav {
 .hb-val a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .hb-val a:hover { color: var(--accent); }
 
-/* ────────────────────────────────
-   SHARED DETAIL STYLES
-──────────────────────────────── */
+/* ── SHARED DETAIL STYLES ── */
 .detail-wrap {
   max-width: 820px; margin: 0 auto;
   padding: 6.5rem 2rem 7rem;
 }
-
 .back-row {
   display: flex; align-items: center; gap: 10px;
   margin-bottom: 3.5rem;
@@ -367,7 +326,6 @@ nav {
   font-family: var(--mono); font-size: 10px;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
 }
-
 .d-eyebrow {
   font-family: var(--mono); font-size: 9px;
   letter-spacing: 0.18em; text-transform: uppercase;
@@ -386,7 +344,6 @@ nav {
   line-height: 1.85; margin-bottom: 3rem;
   max-width: 580px; font-weight: 300;
 }
-
 .spec-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
@@ -400,7 +357,6 @@ nav {
   color: var(--faint); margin-bottom: 4px;
 }
 .spec-val { font-size: 12px; color: var(--text); line-height: 1.55; }
-
 .dsec { margin-bottom: 2.5rem; }
 .dsec-ttl {
   font-family: var(--mono); font-size: 9px;
@@ -418,7 +374,6 @@ nav {
   content: '›'; position: absolute; left: 0;
   color: var(--faint); font-size: 10px; top: 3px;
 }
-
 .v-badge {
   display: inline-block;
   font-family: var(--mono); font-size: 9px;
@@ -427,7 +382,7 @@ nav {
   padding: 3px 9px; margin-bottom: 1rem;
 }
 
-/* STRYKER sub */
+/* ── STRYKER PICKER ── */
 .sv-grid {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 1px; background: var(--border);
@@ -461,7 +416,7 @@ nav {
 .sv-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
 .sv-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
 
-/* FOOTER */
+/* ── FOOTER ── */
 footer {
   border-top: 1px solid var(--border);
   padding: 1.5rem 2rem; text-align: center;
@@ -469,15 +424,18 @@ footer {
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);
 }
 
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media (max-width: 700px) {
   nav { padding: 0 1.25rem; }
-  .hero, .timeline-section, .menu-section, .home-bottom, .detail-wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .hero, .timeline-section, .menu-section, .home-bottom, .detail-wrap {
+    padding-left: 1.25rem; padding-right: 1.25rem;
+  }
   .menu-header, .menu-row { grid-template-columns: 2.5rem 1fr; }
-  .menu-header span:nth-child(3), .menu-header span:nth-child(4),
-  .menu-type, .menu-tags { display: none; }
+  .menu-header span:nth-child(3), .menu-type { display: none; }
   .sv-grid { grid-template-columns: 1fr; }
   .hero-name { font-size: clamp(4rem, 16vw, 8rem); }
+  .tl-role { font-size: 10px; }
+  .tl-place { font-size: 8px; }
 }
 </style>
 </head>
@@ -494,63 +452,54 @@ footer {
   </ul>
 </nav>
 
-<!-- ────────── HOME ────────── -->
+<!-- ── HOME ── -->
 <div id="home" class="page active">
 
   <div class="hero">
     <h1 class="hero-name">JASON<br>HERNANDEZ<br>LOPEZ<span>.</span></h1>
-    <p class="hero-sub">Robotics Engineer · University of Michigan · Ann Arbor · Class of 2027</p>
+    <p class="hero-sub">Robotics Engineer · University of Michigan — Ann Arbor · Class of 2027</p>
   </div>
 
   <!-- TIMELINE -->
   <div class="timeline-section">
-    <p class="timeline-label">Timeline — June 2023 → Present</p>
-    <div class="timeline">
-      <div class="tl-track">
+    <p class="timeline-label">Timeline — Aug 2023 → Present</p>
+    <div class="tl-track">
 
-        <div class="tl-node" style="width:160px">
-          <div class="tl-dot"></div>
-          <p class="tl-date">Jun 2023</p>
-          <p class="tl-role">High School Graduation</p>
-          <p class="tl-place">—</p>
-        </div>
-
-        <div class="tl-node" style="width:425px">
-          <div class="tl-dot"></div>
-          <p class="tl-date">Aug 2023</p>
-          <p class="tl-role">Freshman Year Begins</p>
-          <p class="tl-place">Univ. of Michigan</p>
-        </div>
-
-        <div class="tl-node" style="width:160px">
-          <div class="tl-dot"></div>
-          <p class="tl-date">Jan 2025 – Apr 2025</p>
-          <p class="tl-role">Robot Technician — Site Lead</p>
-          <p class="tl-place">Starship Technologies</p>
-        </div>
-
-        <div class="tl-node" style="width:200px">
-          <div class="tl-dot"></div>
-          <p class="tl-date">May 2025 – Aug 2025</p>
-          <p class="tl-role">Robotics Hardware Intern</p>
-          <p class="tl-place">Serve Robotics</p>
-        </div>
-
-        <div class="tl-node" style="width:160px">
-          <div class="tl-dot"></div>
-          <p class="tl-date">Jan 2026 – Present</p>
-          <p class="tl-role">Hardware Intern</p>
-          <p class="tl-place">New Haptics</p>
-        </div>
-
-        <div class="tl-node" style="width:120px">
-          <div class="tl-dot now"></div>
-          <p class="tl-date">Present</p>
-          <p class="tl-role">Junior — Robotics Eng.</p>
-          <p class="tl-place">Ann Arbor, MI</p>
-        </div>
-
+      <div class="tl-node">
+        <div class="tl-dot"></div>
+        <p class="tl-date">Aug '23</p>
+        <p class="tl-role">Freshman Year</p>
+        <p class="tl-place">U of Michigan</p>
       </div>
+
+      <div class="tl-node">
+        <div class="tl-dot"></div>
+        <p class="tl-date">Jan '25</p>
+        <p class="tl-role">Robot Tech · Site Lead</p>
+        <p class="tl-place">Starship</p>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-dot"></div>
+        <p class="tl-date">May '25</p>
+        <p class="tl-role">HW Intern</p>
+        <p class="tl-place">Serve Robotics</p>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-dot"></div>
+        <p class="tl-date">Jan '26</p>
+        <p class="tl-role">HW Intern</p>
+        <p class="tl-place">New Haptics</p>
+      </div>
+
+      <div class="tl-node">
+        <div class="tl-dot now"></div>
+        <p class="tl-date">Present</p>
+        <p class="tl-role">Junior Year</p>
+        <p class="tl-place">Ann Arbor, MI</p>
+      </div>
+
     </div>
   </div>
 
@@ -558,7 +507,7 @@ footer {
   <div class="menu-section">
     <p class="menu-section-label">Projects</p>
     <div class="menu-header">
-      <span>No.</span><span>Project</span><span>Type</span><span>Stack</span>
+      <span>No.</span><span>Project</span><span>Type</span>
     </div>
 
     <a class="menu-row" onclick="show('stryker')" href="#">
@@ -566,9 +515,13 @@ footer {
       <div class="menu-row-inner">
         <p class="menu-pname">STRYKER</p>
         <span class="menu-psub">6-DOF Robotic Arm</span>
+        <div class="menu-tags">
+          <span class="mtag">Inverse Kinematics</span>
+          <span class="mtag">Computer Vision</span>
+          <span class="mtag">PCB Design</span>
+        </div>
       </div>
-      <span class="menu-type">Design</span>
-      <div class="menu-tags"><span class="mtag">6-DOF</span><span class="mtag">3D Print</span><span class="mtag">ESP32</span></div>
+      <span class="menu-type">Full Stack</span>
       <span class="menu-arrow">→</span>
     </a>
 
@@ -577,9 +530,13 @@ footer {
       <div class="menu-row-inner">
         <p class="menu-pname">SENTINEL</p>
         <span class="menu-psub">Self-Balancing Ball Robot</span>
+        <div class="menu-tags">
+          <span class="mtag">PID Control</span>
+          <span class="mtag">IMU Fusion</span>
+          <span class="mtag">Motor Dynamics</span>
+        </div>
       </div>
-      <span class="menu-type">Controls</span>
-      <div class="menu-tags"><span class="mtag">PID</span><span class="mtag">IMU</span><span class="mtag">Full-Stack</span></div>
+      <span class="menu-type">Controls + Mechatronics</span>
       <span class="menu-arrow">→</span>
     </a>
 
@@ -588,9 +545,13 @@ footer {
       <div class="menu-row-inner">
         <p class="menu-pname">RANGER</p>
         <span class="menu-psub">Autonomous Mobile Robot</span>
+        <div class="menu-tags">
+          <span class="mtag">Odometry</span>
+          <span class="mtag">Reactive Navigation</span>
+          <span class="mtag">Signal Conditioning</span>
+        </div>
       </div>
-      <span class="menu-type">Systems</span>
-      <div class="menu-tags"><span class="mtag">BeagleBone</span><span class="mtag">Control</span><span class="mtag">Vision</span></div>
+      <span class="menu-type">Embedded</span>
       <span class="menu-arrow">→</span>
     </a>
 
@@ -599,9 +560,13 @@ footer {
       <div class="menu-row-inner">
         <p class="menu-pname">LEONARDO</p>
         <span class="menu-psub">Autonomous Drawing Robot</span>
+        <div class="menu-tags">
+          <span class="mtag">Inverse Kinematics</span>
+          <span class="mtag">Torque Analysis</span>
+          <span class="mtag">Closed-Loop Control</span>
+        </div>
       </div>
-      <span class="menu-type">Mechatronics</span>
-      <div class="menu-tags"><span class="mtag">Arduino</span><span class="mtag">Inv. Kinematics</span><span class="mtag">MATLAB</span></div>
+      <span class="menu-type">Controls + Embedded</span>
       <span class="menu-arrow">→</span>
     </a>
 
@@ -610,9 +575,13 @@ footer {
       <div class="menu-row-inner">
         <p class="menu-pname">PATHFINDER</p>
         <span class="menu-psub">Autonomous Line-Following Robot</span>
+        <div class="menu-tags">
+          <span class="mtag">Cascaded Control</span>
+          <span class="mtag">Encoder Feedback</span>
+          <span class="mtag">I²C</span>
+        </div>
       </div>
       <span class="menu-type">Embedded</span>
-      <div class="menu-tags"><span class="mtag">RPi Pico</span><span class="mtag">PID</span><span class="mtag">Bang-Bang</span></div>
       <span class="menu-arrow">→</span>
     </a>
 
@@ -621,15 +590,19 @@ footer {
       <div class="menu-row-inner">
         <p class="menu-pname">FORKRUNNER</p>
         <span class="menu-psub">Machined Competition Robot</span>
+        <div class="menu-tags">
+          <span class="mtag">Gear Train Analysis</span>
+          <span class="mtag">Lead-Screw</span>
+          <span class="mtag">GD&amp;T</span>
+        </div>
       </div>
-      <span class="menu-type">Mechanical</span>
-      <div class="menu-tags"><span class="mtag">Machining</span><span class="mtag">Drivetrain</span><span class="mtag">GD&amp;T</span></div>
+      <span class="menu-type">Mechanical + Mfg</span>
       <span class="menu-arrow">→</span>
     </a>
 
   </div>
 
-  <!-- CONTACT STRIP -->
+  <!-- CONTACT -->
   <div class="home-bottom" id="hbottom">
     <div class="hb-block">
       <span class="hb-label">Education</span>
@@ -656,155 +629,31 @@ footer {
   <footer>© 2026 Jason Hernandez Lopez — Robotics Engineering · University of Michigan</footer>
 </div>
 
-<!-- ────────── LEONARDO ────────── -->
-<div id="leonardo" class="page">
-  <div class="detail-wrap">
-    <div class="back-row"><button class="back-btn" onclick="goHome()">← All Projects</button></div>
-    <p class="d-eyebrow">Project 04 — Mechatronics</p>
-    <h1 class="d-title">LEONARDO</h1>
-    <p class="d-lead">A two-axis robotic arm that replicates any user-inputted image on canvas with precision — designed, built, and programmed end-to-end for under $200.</p>
-    <div class="spec-grid">
-      <div class="spec-cell"><p class="spec-lbl">Controller</p><p class="spec-val">Arduino Nano 33 IoT w/ Motor Carrier</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Actuation</p><p class="spec-val">2 DC motors w/ encoders + 1 servo</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Build Cost</p><p class="spec-val">~$200</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Output</p><p class="spec-val">Draws any user-inputted image</p></div>
-    </div>
-    <div class="dsec">
-      <p class="dsec-ttl">Torque Analysis & Workspace Mapping</p>
-      <ul class="blist">
-        <li>Calculated motor torque throughout canvas to determine load distribution and movement feasibility</li>
-        <li>Mapped theoretical work region in MATLAB, eliminating unreachable areas</li>
-        <li>Visualized realistic work region within safe operating limits (≤35% of stall torque)</li>
-        <li>Applied results to image scaling algorithms to enforce physical boundaries</li>
-      </ul>
-    </div>
-    <div class="dsec">
-      <p class="dsec-ttl">Software Architecture</p>
-      <ul class="blist">
-        <li>Image processing pipeline converts pixel coordinates into structured path segments</li>
-        <li>Path planning scales segments to board dimensions using inverse kinematics</li>
-        <li>Motor commands generated from joint angles with encoder feedback for closed-loop position control</li>
-      </ul>
-    </div>
-    <div class="dsec">
-      <p class="dsec-ttl">Result</p>
-      <p>Demonstrated precise replication of logos and complex shapes from a single user input. Future iterations target an improved marker mechanism and additional degrees of freedom.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ────────── RANGER ────────── -->
-<div id="ranger" class="page">
-  <div class="detail-wrap">
-    <div class="back-row"><button class="back-btn" onclick="goHome()">← All Projects</button></div>
-    <p class="d-eyebrow">Project 02 — Autonomous Systems</p>
-    <h1 class="d-title">RANGER</h1>
-    <p class="d-lead">A fully autonomous mobile robot integrating motion control, odometry, distance sensing, navigation, thermal detection, and vision-based perception on a single platform.</p>
-    <div class="spec-grid">
-      <div class="spec-cell"><p class="spec-lbl">Main Controller</p><p class="spec-val">BeagleBone Blue</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Sensor MCU</p><p class="spec-val">Arduino Nano</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Drive</p><p class="spec-val">Differential, DC motors w/ encoders</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Sensors</p><p class="spec-val">Ultrasonic sonar, USB camera, thermopile</p></div>
-    </div>
-    <div class="dsec">
-      <p class="dsec-ttl">Odometry & Error Analysis</p>
-      <ul class="blist">
-        <li>Recorded odometry trajectories across repeated square-path trials</li>
-        <li>Compared estimated positions against ruler measurements to quantify drift</li>
-        <li>Computed mean error and standard deviation — results motivated closed-loop control</li>
-      </ul>
-    </div>
-    <div class="dsec">
-      <p class="dsec-ttl">Closed-Loop Control</p>
-      <ul class="blist">
-        <li>Tuned distance and heading controllers to correct accumulated drift</li>
-        <li>Demonstrated significant improvement in position accuracy and repeatability vs. open-loop</li>
-      </ul>
-    </div>
-    <div class="dsec">
-      <p class="dsec-ttl">Navigation & Obstacle Avoidance</p>
-      <ul class="blist">
-        <li>Applied median filtering to sonar measurements to suppress noise</li>
-        <li>Developed reactive obstacle avoidance logic, verified through live robot trials</li>
-      </ul>
-    </div>
-    <div class="dsec">
-      <p class="dsec-ttl">Thermal Sensing & Signal Conditioning</p>
-      <ul class="blist">
-        <li>Designed analog amplification stage; characterized SNR before and after</li>
-        <li>Determined angular and distance detection limits via voltage threshold</li>
-        <li>Applied HSV color thresholding for visual detection; implemented centering and approach behaviors</li>
-      </ul>
-    </div>
-    <div class="dsec">
-      <p class="dsec-ttl">Audio Sensing Subsystem</p>
-      <ul class="blist">
-        <li>Independently designed analog front-end for a MEMS microphone</li>
-        <li>Defined gain, filtering, and bandwidth; specified ADC sampling and UART communication</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- ────────── FORKRUNNER ────────── -->
-<div id="forkrunner" class="page">
-  <div class="detail-wrap">
-    <div class="back-row"><button class="back-btn" onclick="goHome()">← All Projects</button></div>
-    <p class="d-eyebrow">Project 06 — Mechanical Design</p>
-    <h1 class="d-title">FORKRUNNER</h1>
-    <p class="d-lead">A competition robot machined entirely from stock aluminum — high-torque differential drivetrain and lead-screw forklift mechanism, designed and fabricated to specification.</p>
-    <div class="spec-grid">
-      <div class="spec-cell"><p class="spec-lbl">Gear Reduction</p><p class="spec-val">344.2:1 (verified safety margin)</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Incline Rating</p><p class="spec-val">25° worst-case traversal</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Lift</p><p class="spec-val">Lead-screw, empirically characterized</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Fabrication</p><p class="spec-val">Manual mill & lathe from stock aluminum</p></div>
-    </div>
-    <div class="dsec">
-      <p class="dsec-ttl">Chassis & Drivetrain</p>
-      <ul class="blist">
-        <li>Worst-case torque analysis for 25° incline — 344.2:1 gear reduction selected with verified safety margin</li>
-        <li>Designed mounting features for alignment and structural robustness under load</li>
-        <li>Machined all components via manual mill and lathe from raw stock</li>
-        <li>Produced fully dimensioned engineering drawings and manufacturing plans for repeatable assembly</li>
-      </ul>
-    </div>
-    <div class="dsec">
-      <p class="dsec-ttl">Forklift Mechanism</p>
-      <ul class="blist">
-        <li>Fork-style lifting mechanism balancing transport stability and drivetrain performance impact</li>
-        <li>Empirically characterized payload mass; sized lead-screw actuation with adequate force margin</li>
-        <li>Minimized carriage mass, integrated guided vertical motion to reduce torque and prevent binding</li>
-        <li>Machined all components to tight tolerances</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- ────────── STRYKER (intermediate) ────────── -->
+<!-- ── STRYKER picker ── -->
 <div id="stryker" class="page">
   <div class="detail-wrap">
     <div class="back-row"><button class="back-btn" onclick="goHome()">← All Projects</button></div>
-    <p class="d-eyebrow">Project 01 — Design</p>
+    <p class="d-eyebrow">Project 01 — Full-Stack Robotics</p>
     <h1 class="d-title">STRYKER</h1>
-    <p class="d-lead">An in-progress 6-degree-of-freedom serial manipulator exploring the mechanical, electrical, and systems challenges of an industry-standard robotic arm. Two iterations, each building on the last.</p>
+    <p class="d-lead">A 6-DOF serial manipulator developed across two iterations — from initial mechanical prototype to a fully autonomous pick-and-place system with computer vision and custom electronics.</p>
     <div class="sv-grid">
       <a class="sv-card" onclick="show('stryker1')" href="#">
         <span class="sv-v">Version 01</span>
         <p class="sv-name">STRYKER V1</p>
         <p class="sv-desc">First build — joint layout established, 3D-printed structure assembled, servo-based actuation prototyped end-to-end.</p>
-        <div class="sv-tags"><span class="mtag">3D Printing</span><span class="mtag">ESP32</span><span class="mtag">6-DOF</span></div>
+        <div class="sv-tags"><span class="mtag">3D Printing</span><span class="mtag">ESP32</span><span class="mtag">Servo PWM</span></div>
       </a>
       <a class="sv-card" onclick="show('stryker2')" href="#">
         <span class="sv-v">Version 02</span>
         <p class="sv-name">STRYKER V2</p>
-        <p class="sv-desc">Redesigned geometry, corrected joint clearances, full kinematic validation in CAD before fabrication.</p>
-        <div class="sv-tags"><span class="mtag">CAD Sim</span><span class="mtag">PWM</span><span class="mtag">Iterative</span></div>
+        <p class="sv-desc">Autonomous pick-and-place — computer vision pipeline, custom PCB, geometric IK solver, and empirical servo calibration.</p>
+        <div class="sv-tags"><span class="mtag">Computer Vision</span><span class="mtag">Inv. Kinematics</span><span class="mtag">Custom PCB</span></div>
       </a>
     </div>
   </div>
 </div>
 
-<!-- ────────── STRYKER V1 ────────── -->
+<!-- ── STRYKER V1 ── -->
 <div id="stryker1" class="page">
   <div class="detail-wrap">
     <div class="back-row">
@@ -814,10 +663,10 @@ footer {
     <p class="d-eyebrow">Project 01 · Version 01</p>
     <div class="v-badge">V1 — Initial Build</div>
     <h1 class="d-title">STRYKER V1</h1>
-    <p class="d-lead">First iteration — joint layout validated, 3D-printed structure assembled, servo-based actuation prototyped.</p>
+    <p class="d-lead">First iteration — joint layout validated, 3D-printed structure assembled, servo-based actuation prototyped end-to-end.</p>
     <div class="spec-grid">
       <div class="spec-cell"><p class="spec-lbl">DOF</p><p class="spec-val">6 (yaw, shoulder, elbow, wrist ×2, gripper)</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Fabrication</p><p class="spec-val">3D printed components</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Fabrication</p><p class="spec-val">FDM 3D printed — PLA</p></div>
       <div class="spec-cell"><p class="spec-lbl">Control</p><p class="spec-val">ESP32 + dedicated servo driver</p></div>
       <div class="spec-cell"><p class="spec-lbl">Power</p><p class="spec-val">6V, bulk capacitors for transient suppression</p></div>
     </div>
@@ -845,7 +694,7 @@ footer {
   </div>
 </div>
 
-<!-- ────────── STRYKER V2 ────────── -->
+<!-- ── STRYKER V2 ── -->
 <div id="stryker2" class="page">
   <div class="detail-wrap">
     <div class="back-row">
@@ -853,92 +702,75 @@ footer {
       <span class="bcsep">/</span><span class="bccur">Version 2</span>
     </div>
     <p class="d-eyebrow">Project 01 · Version 02</p>
-    <div class="v-badge">V2 — Refined Build</div>
+    <div class="v-badge">V2 — Autonomous Pick & Place</div>
     <h1 class="d-title">STRYKER V2</h1>
-    <p class="d-lead">Second iteration with corrected geometry, improved joint clearances, and full kinematic validation in CAD before any fabrication began.</p>
+    <p class="d-lead">A fully autonomous pick-and-place system built on the V1 platform — integrating a computer vision pipeline, geometric inverse kinematics, custom PCB, and empirical servo calibration to detect and retrieve a red block from a live camera feed.</p>
     <div class="spec-grid">
-      <div class="spec-cell"><p class="spec-lbl">DOF</p><p class="spec-val">6 (same layout, refined geometry)</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Validation</p><p class="spec-val">CAD animation before fabrication</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Control</p><p class="spec-val">ESP32 + servo driver (refined)</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Status</p><p class="spec-val">In progress</p></div>
+      <div class="spec-cell"><p class="spec-lbl">DOF</p><p class="spec-val">6 (J1 yaw, J2–J3 pitch, J4–J5 wrist, J6 gripper)</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Controller</p><p class="spec-val">Arduino Nano + PCA9685 PWM driver</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Vision</p><p class="spec-val">iPhone overhead + ArUco fiducials</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Software</p><p class="spec-val">Python / OpenCV pipeline</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Calibration</p><p class="spec-val">RANSAC homography + piecewise-linear servo model</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Outcome</p><p class="spec-val">Autonomous red block detection & pick-up</p></div>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Design Improvements</p>
+      <p class="dsec-ttl">System Architecture</p>
       <ul class="blist">
-        <li>All joints modeled and animated in CAD — validated limits, clearances, and kinematic behavior before fabrication</li>
-        <li>Corrected clearance issues from V1; achieved smooth motion across all DOFs</li>
-        <li>Improved structural rigidity and wiring organization throughout</li>
+        <li>Three independently testable subsystems: mechanical arm, computer vision pipeline, and software control stack</li>
+        <li>Pre-design physics simulator evaluated arm configurations, center-of-mass footprint, and tipping risk before fabricating — flagged extended configs as "POSSIBLE TIPPING," directly informing base reinforcement</li>
+        <li>Modular Python codebase: separate modules for camera capture, detection, kinematics, Arduino communication, and pick-and-place state machine</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Electronics</p>
+      <p class="dsec-ttl">Computer Vision Pipeline</p>
       <ul class="blist">
-        <li>Retained ESP32 + servo driver architecture; refined power distribution and PWM routing</li>
-        <li>Kinematic behavior validated through CAD simulation before committing to parts</li>
+        <li>iPhone mounted overhead on frame — full workspace visible, minimal perspective distortion</li>
+        <li>Four ArUco fiducial markers (IDs 0–3) at workspace corners; RANSAC-based homography maps pixel coordinates to real-world XY in the arm base frame</li>
+        <li>Each frame converted to HSV; red block isolated via dual-mask thresholding + minimum saturation gate to reject lighting-induced noise</li>
+        <li>Confidence score filters false positives (faces, hands, circular objects); accepted centroid forwarded to IK solver</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Status</p>
-      <p>Active project. Current focus: closed-loop joint control and coordinated multi-joint motion toward industry-standard manipulator performance.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ────────── PATHFINDER ────────── -->
-<div id="pathfinder" class="page">
-  <div class="detail-wrap">
-    <div class="back-row"><button class="back-btn" onclick="goHome()">← All Projects</button></div>
-    <p class="d-eyebrow">Project 05 — Embedded Systems</p>
-    <h1 class="d-title">PATHFINDER</h1>
-    <p class="d-lead">An autonomous line-following robot built on a cascaded control architecture — bang-bang lateral guidance feeding a PID wheel-speed controller for precise, stable traversal.</p>
-    <div class="spec-grid">
-      <div class="spec-cell"><p class="spec-lbl">Platform</p><p class="spec-val">MBot (differential drive)</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Microcontroller</p><p class="spec-val">Raspberry Pi Pico (MicroPython)</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Line Sensing</p><p class="spec-val">7-ch IR reflectance array (I2C)</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Feedback</p><p class="spec-val">Quadrature encoders, 48:1 gear ratio</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Control</p><p class="spec-val">Bang-bang → PID cascade</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Smoothing</p><p class="spec-val">Exponential filter (α ≈ 0.75)</p></div>
-    </div>
-    <div class="dsec">
-      <p class="dsec-ttl">Encoder & Motor Control</p>
+      <p class="dsec-ttl">Custom PCB & Electronics</p>
       <ul class="blist">
-        <li>Interrupt-driven quadrature decoder via MicroPython Pin.irq() — event-driven, no polling</li>
-        <li>Motor class: forward/reverse PWM at 10 kHz, duty-cycle saturation protection</li>
-        <li>Wheel speed calculated in rev/s from tick and time deltas; verified against AD2 oscilloscope</li>
+        <li>Custom PCB integrates Arduino Nano with PCA9685 16-channel PWM servo driver — routes all six servo signal lines and power on a single board</li>
+        <li>JST connectors on servo leads for tool-free disassembly; eliminated intermittent failures that plagued breadboard prototype</li>
+        <li>Compact footprint designed to embed in arm base in future iterations</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">PID Wheel Speed Controller</p>
+      <p class="dsec-ttl">Inverse Kinematics & Servo Calibration</p>
       <ul class="blist">
-        <li>Time-discrete P, I, D terms tuned for step-input response with minimal overshoot</li>
-        <li>Motor current sensed via ADC (1 V/A); logged PWM, speed, setpoint, and current</li>
-        <li>Output saturation applied to prevent integrator wind-up at duty cycle limits</li>
+        <li>Three-step geometric IK: (1) base yaw q₁ = atan2(y, x), (2) 2R cosine-law solve for q₂ and q₃ with both elbow branches evaluated, (3) wrist pitch q₅ searched over 180°–136°</li>
+        <li>Piecewise-linear servo characterization with asymmetric slopes per joint — captures real servo behavior significantly better than a single linear fit</li>
+        <li>Empirical correction via custom STRYKER Manual Joint Control UI: arm manually driven to five target positions; joint pulse values and vision-measured XY coordinates recorded and fit to correction model</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Line Sensor (I2C / PCA9557)</p>
+      <p class="dsec-ttl">Autonomous Pick Sequence</p>
       <ul class="blist">
-        <li>Configured PCA9557 I/O expander: set configuration, polarity inversion, and output registers</li>
-        <li>Read() method: enables LED array → reads 7-bit reflectance byte → disables array</li>
-        <li>Polarity inversion ensures bits read HIGH when sensor is over white line</li>
+        <li>Eight-command sequence: Approach → Descend → Grasp → Lift → Approach → Descend → Release → Lift</li>
+        <li>Smoothstep motion interpolation at 9–700 ms per move — tuned to minimize joint jitter without excessive cycle time</li>
+        <li>Successfully demonstrated autonomous red block detection and pick-up in live testing (ROB 310 final demo)</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Bang-Bang → PID Cascade</p>
+      <p class="dsec-ttl">Challenges & Next Steps</p>
       <ul class="blist">
-        <li>Bang-bang reads reflectance array and outputs left/right speed setpoints</li>
-        <li>Exponential smoothing (α ≈ 0.75) reduced in-rush current by ~150 mA vs. unfiltered</li>
-        <li>PID controllers at ~50 ms loop period — demonstrated successful curved-course traversal</li>
+        <li>HSV thresholding sensitive to variable lighting — required multiple threshold and morphological parameter iterations to achieve robust detection</li>
+        <li>IK solver evaluates only two elbow branches; workspace-boundary edge cases occasionally produced unreachable configurations</li>
+        <li>Place-down sequence not completed within project timeline — primary target for next iteration</li>
+        <li>Future: continuous vision loop, low-pass filter on servo PWM, Jacobian-based IK for full reachability</li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- ────────── SENTINEL ────────── -->
+<!-- ── SENTINEL ── -->
 <div id="sentinel" class="page">
   <div class="detail-wrap">
     <div class="back-row"><button class="back-btn" onclick="goHome()">← All Projects</button></div>
-    <p class="d-eyebrow">Project 02 — Controls & Full-Stack Robotics</p>
+    <p class="d-eyebrow">Project 02 — Controls & Mechatronics</p>
     <h1 class="d-title">SENTINEL</h1>
     <p class="d-lead">A self-balancing ball robot designed, built, and controlled from scratch — full-stack robotics covering motor selection, kinematics, electronics, and dual PID balance and steering control.</p>
     <div class="spec-grid">
@@ -988,8 +820,181 @@ footer {
   </div>
 </div>
 
+<!-- ── RANGER ── -->
+<div id="ranger" class="page">
+  <div class="detail-wrap">
+    <div class="back-row"><button class="back-btn" onclick="goHome()">← All Projects</button></div>
+    <p class="d-eyebrow">Project 03 — Embedded Systems</p>
+    <h1 class="d-title">RANGER</h1>
+    <p class="d-lead">A fully autonomous mobile robot integrating motion control, odometry, distance sensing, navigation, thermal detection, and vision-based perception on a single platform.</p>
+    <div class="spec-grid">
+      <div class="spec-cell"><p class="spec-lbl">Main Controller</p><p class="spec-val">BeagleBone Blue</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Sensor MCU</p><p class="spec-val">Arduino Nano</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Drive</p><p class="spec-val">Differential, DC motors w/ encoders</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Sensors</p><p class="spec-val">Ultrasonic sonar, USB camera, thermopile</p></div>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Odometry & Error Analysis</p>
+      <ul class="blist">
+        <li>Recorded odometry trajectories across repeated square-path trials</li>
+        <li>Compared estimated positions against ruler measurements to quantify drift</li>
+        <li>Computed mean error and standard deviation — results motivated closed-loop control</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Closed-Loop Control</p>
+      <ul class="blist">
+        <li>Tuned distance and heading controllers to correct accumulated drift</li>
+        <li>Demonstrated significant improvement in position accuracy and repeatability vs. open-loop</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Navigation & Obstacle Avoidance</p>
+      <ul class="blist">
+        <li>Applied median filtering to sonar measurements to suppress noise</li>
+        <li>Developed reactive obstacle avoidance logic, verified through live robot trials</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Thermal Sensing & Signal Conditioning</p>
+      <ul class="blist">
+        <li>Designed analog amplification stage; characterized SNR before and after</li>
+        <li>Determined angular and distance detection limits via voltage threshold</li>
+        <li>Applied HSV color thresholding for visual detection; implemented centering and approach behaviors</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Audio Sensing Subsystem</p>
+      <ul class="blist">
+        <li>Independently designed analog front-end for a MEMS microphone</li>
+        <li>Defined gain, filtering, and bandwidth; specified ADC sampling and UART communication</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── LEONARDO ── -->
+<div id="leonardo" class="page">
+  <div class="detail-wrap">
+    <div class="back-row"><button class="back-btn" onclick="goHome()">← All Projects</button></div>
+    <p class="d-eyebrow">Project 04 — Controls & Embedded</p>
+    <h1 class="d-title">LEONARDO</h1>
+    <p class="d-lead">A two-axis robotic arm that replicates any user-inputted image on canvas with precision — designed, built, and programmed end-to-end for under $200.</p>
+    <div class="spec-grid">
+      <div class="spec-cell"><p class="spec-lbl">Controller</p><p class="spec-val">Arduino Nano 33 IoT w/ Motor Carrier</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Actuation</p><p class="spec-val">2 DC motors w/ encoders + 1 servo</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Build Cost</p><p class="spec-val">~$200</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Output</p><p class="spec-val">Draws any user-inputted image</p></div>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Torque Analysis & Workspace Mapping</p>
+      <ul class="blist">
+        <li>Calculated motor torque throughout canvas to determine load distribution and movement feasibility</li>
+        <li>Mapped theoretical work region in MATLAB, eliminating unreachable areas</li>
+        <li>Visualized realistic work region within safe operating limits (≤35% of stall torque)</li>
+        <li>Applied results to image scaling algorithms to enforce physical boundaries</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Software Architecture</p>
+      <ul class="blist">
+        <li>Image processing pipeline converts pixel coordinates into structured path segments</li>
+        <li>Path planning scales segments to board dimensions using inverse kinematics</li>
+        <li>Motor commands generated from joint angles with encoder feedback for closed-loop position control</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Result</p>
+      <p>Demonstrated precise replication of logos and complex shapes from a single user input. Future iterations target an improved marker mechanism and additional degrees of freedom.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── PATHFINDER ── -->
+<div id="pathfinder" class="page">
+  <div class="detail-wrap">
+    <div class="back-row"><button class="back-btn" onclick="goHome()">← All Projects</button></div>
+    <p class="d-eyebrow">Project 05 — Embedded Systems</p>
+    <h1 class="d-title">PATHFINDER</h1>
+    <p class="d-lead">An autonomous line-following robot built on a cascaded control architecture — bang-bang lateral guidance feeding a PID wheel-speed controller for precise, stable traversal.</p>
+    <div class="spec-grid">
+      <div class="spec-cell"><p class="spec-lbl">Platform</p><p class="spec-val">MBot (differential drive)</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Microcontroller</p><p class="spec-val">Raspberry Pi Pico (MicroPython)</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Line Sensing</p><p class="spec-val">7-ch IR reflectance array (I2C)</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Feedback</p><p class="spec-val">Quadrature encoders, 48:1 gear ratio</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Control</p><p class="spec-val">Bang-bang → PID cascade</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Smoothing</p><p class="spec-val">Exponential filter (α ≈ 0.75)</p></div>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Encoder & Motor Control</p>
+      <ul class="blist">
+        <li>Interrupt-driven quadrature decoder via MicroPython Pin.irq() — event-driven, no polling</li>
+        <li>Motor class: forward/reverse PWM at 10 kHz, duty-cycle saturation protection</li>
+        <li>Wheel speed calculated in rev/s from tick and time deltas; verified against AD2 oscilloscope</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">PID Wheel Speed Controller</p>
+      <ul class="blist">
+        <li>Time-discrete P, I, D terms tuned for step-input response with minimal overshoot</li>
+        <li>Motor current sensed via ADC (1 V/A); logged PWM, speed, setpoint, and current</li>
+        <li>Output saturation applied to prevent integrator wind-up at duty cycle limits</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Line Sensor (I2C / PCA9557)</p>
+      <ul class="blist">
+        <li>Configured PCA9557 I/O expander: set configuration, polarity inversion, and output registers</li>
+        <li>Read() method: enables LED array → reads 7-bit reflectance byte → disables array</li>
+        <li>Polarity inversion ensures bits read HIGH when sensor is over white line</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Bang-Bang → PID Cascade</p>
+      <ul class="blist">
+        <li>Bang-bang reads reflectance array and outputs left/right speed setpoints</li>
+        <li>Exponential smoothing (α ≈ 0.75) reduced in-rush current by ~150 mA vs. unfiltered</li>
+        <li>PID controllers at ~50 ms loop period — demonstrated successful curved-course traversal</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── FORKRUNNER ── -->
+<div id="forkrunner" class="page">
+  <div class="detail-wrap">
+    <div class="back-row"><button class="back-btn" onclick="goHome()">← All Projects</button></div>
+    <p class="d-eyebrow">Project 06 — Mechanical & Manufacturing</p>
+    <h1 class="d-title">FORKRUNNER</h1>
+    <p class="d-lead">A competition robot machined entirely from stock aluminum — high-torque differential drivetrain and lead-screw forklift mechanism, designed and fabricated to specification.</p>
+    <div class="spec-grid">
+      <div class="spec-cell"><p class="spec-lbl">Gear Reduction</p><p class="spec-val">344.2:1 (verified safety margin)</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Incline Rating</p><p class="spec-val">25° worst-case traversal</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Lift</p><p class="spec-val">Lead-screw, empirically characterized</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Fabrication</p><p class="spec-val">Manual mill & lathe from stock aluminum</p></div>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Chassis & Drivetrain</p>
+      <ul class="blist">
+        <li>Worst-case torque analysis for 25° incline — 344.2:1 gear reduction selected with verified safety margin</li>
+        <li>Designed mounting features for alignment and structural robustness under load</li>
+        <li>Machined all components via manual mill and lathe from raw stock</li>
+        <li>Produced fully dimensioned engineering drawings and manufacturing plans for repeatable assembly</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Forklift Mechanism</p>
+      <ul class="blist">
+        <li>Fork-style lifting mechanism balancing transport stability and drivetrain performance impact</li>
+        <li>Empirically characterized payload mass; sized lead-screw actuation with adequate force margin</li>
+        <li>Minimized carriage mass, integrated guided vertical motion to reduce torque and prevent binding</li>
+        <li>Machined all components to tight tolerances</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <script>
-  // ── CURSOR
   const cursor = document.getElementById('cursor');
   document.addEventListener('mousemove', e => {
     cursor.style.left = e.clientX + 'px';
@@ -1000,7 +1005,6 @@ footer {
     el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
   });
 
-  // ── PAGE NAV
   function show(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const el = document.getElementById(id);
