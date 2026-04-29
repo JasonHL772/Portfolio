@@ -164,6 +164,18 @@ nav {
   pointer-events: none;
   z-index: 0;
 }
+.tl-track::after {
+  content: '';
+  position: absolute;
+  top: 6px; left: 0;
+  width: 80%;
+  height: 1px;
+  background: var(--accent);
+  pointer-events: none;
+  transform-origin: left center;
+  animation: timelineLineSweep 18s ease-in-out infinite;
+  z-index: 0;
+}
 .tl-node {
   flex: 1 1 0;
   min-width: 0;
@@ -172,16 +184,21 @@ nav {
   padding-right: 0.5rem;
   transform-origin: top left;
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  animation: timelineTour 12.5s ease-in-out infinite;
+  animation: timelineNodeSweep 18s ease-in-out infinite;
   z-index: 1;
 }
-.tl-node:nth-child(2) { animation-delay: 2.2s; }
-.tl-node:nth-child(3) { animation-delay: 4.4s; }
-.tl-node:nth-child(4) { animation-delay: 6.6s; }
-.tl-node:nth-child(5) { animation-delay: 8.8s; }
+.tl-node:nth-child(3) { animation-delay: 3.6s; }
+.tl-node:nth-child(4) { animation-delay: 7.2s; }
+.tl-node:nth-child(5) { animation-delay: 10.8s; }
+.tl-node:nth-child(6) { animation-delay: 14.4s; }
 .tl-track:hover .tl-node {
   animation: none;
   scale: 1;
+}
+.tl-track:hover::after,
+.tl-track:hover .tl-sweep-dot {
+  animation: none;
+  opacity: 0;
 }
 a.tl-node {
   color: inherit;
@@ -194,19 +211,35 @@ a.tl-node .tl-inner {
   pointer-events: none;
 }
 .tl-node:hover { transform: scale(1.13); }
-@keyframes timelineTour {
-  0%, 18%, 100% { scale: 1; }
-  5%, 12% { scale: 1.1; }
+.tl-track:hover .tl-node:not(:hover) {
+  transform: none;
 }
-.tl-inner { animation: nodeIn 0.5s both; }
-.tl-node:nth-child(1) .tl-inner { animation-delay: 0.4s; }
-.tl-node:nth-child(2) .tl-inner { animation-delay: 0.55s; }
-.tl-node:nth-child(3) .tl-inner { animation-delay: 0.7s; }
-.tl-node:nth-child(4) .tl-inner { animation-delay: 0.85s; }
-.tl-node:nth-child(5) .tl-inner { animation-delay: 1.0s; }
-@keyframes nodeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+.tl-sweep-dot {
+  position: absolute;
+  top: 0; left: 0;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(200,185,122,0.4);
+  pointer-events: none;
+  animation: timelineDotSweep 18s ease-in-out infinite;
+  z-index: 2;
+}
+@keyframes timelineNodeSweep {
+  0%, 7.2%, 100% { scale: 1; }
+  1.8%, 5.4% { scale: 1.1; }
+}
+@keyframes timelineLineSweep {
+  0%, 5.6% { transform: scaleX(0); opacity: 0; }
+  7.2% { transform: scaleX(0); opacity: 1; }
+  18.4% { transform: scaleX(0.25); opacity: 1; }
+  27.2% { transform: scaleX(0.25); opacity: 1; }
+  38.4% { transform: scaleX(0.5); opacity: 1; }
+  47.2% { transform: scaleX(0.5); opacity: 1; }
+  58.4% { transform: scaleX(0.75); opacity: 1; }
+  67.2% { transform: scaleX(0.75); opacity: 1; }
+  78.4% { transform: scaleX(1); opacity: 1; }
+  88%, 100% { transform: scaleX(1); opacity: 0; }
 }
 .tl-dot {
   position: absolute;
@@ -218,20 +251,22 @@ a.tl-node .tl-inner {
   z-index: 1;
   transition: border-color 0.3s, background 0.3s;
 }
-.tl-node:not(:last-child) .tl-dot { animation: timelineDotTour 12.5s ease-in-out infinite; }
-.tl-node:nth-child(2) .tl-dot { animation-delay: 2.2s; }
-.tl-node:nth-child(3) .tl-dot { animation-delay: 4.4s; }
-.tl-node:nth-child(4) .tl-dot { animation-delay: 6.6s; }
-.tl-track:hover .tl-dot { animation: none; }
 .tl-node:hover .tl-dot { border-color: var(--accent); background: var(--accent); }
-@keyframes timelineDotTour {
-  0%, 18%, 100% { border-color: var(--faint); background: var(--bg); }
-  5%, 12% { border-color: var(--accent); background: var(--accent); }
+.tl-track:not(:hover) .tl-dot.now {
+  border-color: var(--faint);
+  background: var(--bg);
+  box-shadow: none;
+}
+@keyframes timelineDotSweep {
+  0%, 7.2% { left: 0; }
+  18.4%, 27.2% { left: 20%; }
+  38.4%, 47.2% { left: 40%; }
+  58.4%, 67.2% { left: 60%; }
+  78.4%, 100% { left: 80%; }
 }
 .tl-dot.now {
-  border-color: var(--accent);
-  background: var(--accent);
-  box-shadow: 0 0 8px rgba(200,185,122,0.4);
+  border-color: var(--faint);
+  background: var(--bg);
 }
 .tl-date {
   font-family: var(--mono); font-size: 9px;
@@ -537,6 +572,7 @@ footer {
   <!-- TIMELINE -->
   <div class="timeline-section">
     <div class="tl-track">
+      <span class="tl-sweep-dot"></span>
 
       <a class="tl-node" href="https://robotics.umich.edu/academics/undergraduate/" data-url="https://robotics.umich.edu/academics/undergraduate/">
         <div class="tl-dot"></div>
