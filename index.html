@@ -93,11 +93,30 @@ nav {
   animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .hero-dot { color: var(--accent); }
-.nl { animation: goldPulse 9s linear infinite; }
+.nl { animation: goldPulse 3s linear infinite; }
+.nl:nth-of-type(1) { animation-delay: 0s; }
+.nl:nth-of-type(2) { animation-delay: 0.06s; }
+.nl:nth-of-type(3) { animation-delay: 0.12s; }
+.nl:nth-of-type(4) { animation-delay: 0.18s; }
+.nl:nth-of-type(5) { animation-delay: 0.24s; }
+.nl:nth-of-type(6) { animation-delay: 0.3s; }
+.nl:nth-of-type(7) { animation-delay: 0.36s; }
+.nl:nth-of-type(8) { animation-delay: 0.42s; }
+.nl:nth-of-type(9) { animation-delay: 0.48s; }
+.nl:nth-of-type(10) { animation-delay: 0.54s; }
+.nl:nth-of-type(11) { animation-delay: 0.6s; }
+.nl:nth-of-type(12) { animation-delay: 0.66s; }
+.nl:nth-of-type(13) { animation-delay: 0.72s; }
+.nl:nth-of-type(14) { animation-delay: 0.78s; }
+.nl:nth-of-type(15) { animation-delay: 0.84s; }
+.nl:nth-of-type(16) { animation-delay: 0.9s; }
+.nl:nth-of-type(17) { animation-delay: 0.96s; }
+.nl:nth-of-type(18) { animation-delay: 1.02s; }
+.nl:nth-of-type(19) { animation-delay: 1.08s; }
 @keyframes goldPulse {
   0%   { color: var(--text); }
-  2%   { color: var(--accent); }
-  6%   { color: var(--text); }
+  5%   { color: var(--accent); }
+  13%  { color: var(--text); }
   100% { color: var(--text); }
 }
 .hero-sub {
@@ -142,6 +161,7 @@ nav {
   top: 6px; left: 0; right: 0;
   height: 1px;
   background: var(--border2);
+  pointer-events: none;
   z-index: 0;
 }
 .tl-node {
@@ -152,6 +172,17 @@ nav {
   padding-right: 0.5rem;
   transform-origin: top left;
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+a.tl-node {
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+}
+a.tl-node .tl-dot,
+a.tl-node .tl-inner {
+  pointer-events: none;
 }
 .tl-node:hover { transform: scale(1.13); }
 .tl-inner { animation: nodeIn 0.5s both; }
@@ -473,7 +504,7 @@ footer {
 
   <div class="hero">
     <div class="hero-text">
-      <h1 class="hero-name"><span class="nl" style="animation-delay:1.0s">J</span><span class="nl" style="animation-delay:1.2s">A</span><span class="nl" style="animation-delay:1.4s">S</span><span class="nl" style="animation-delay:1.6s">O</span><span class="nl" style="animation-delay:1.8s">N</span><br><span class="nl" style="animation-delay:2.0s">H</span><span class="nl" style="animation-delay:2.2s">E</span><span class="nl" style="animation-delay:2.4s">R</span><span class="nl" style="animation-delay:2.6s">N</span><span class="nl" style="animation-delay:2.8s">A</span><span class="nl" style="animation-delay:3.0s">N</span><span class="nl" style="animation-delay:3.2s">D</span><span class="nl" style="animation-delay:3.4s">E</span><span class="nl" style="animation-delay:3.6s">Z</span><br><span class="nl" style="animation-delay:3.8s">L</span><span class="nl" style="animation-delay:4.0s">O</span><span class="nl" style="animation-delay:4.2s">P</span><span class="nl" style="animation-delay:4.4s">E</span><span class="nl" style="animation-delay:4.6s">Z</span><span class="hero-dot">.</span></h1>
+      <h1 class="hero-name"><span class="nl">J</span><span class="nl">A</span><span class="nl">S</span><span class="nl">O</span><span class="nl">N</span><br><span class="nl">H</span><span class="nl">E</span><span class="nl">R</span><span class="nl">N</span><span class="nl">A</span><span class="nl">N</span><span class="nl">D</span><span class="nl">E</span><span class="nl">Z</span><br><span class="nl">L</span><span class="nl">O</span><span class="nl">P</span><span class="nl">E</span><span class="nl">Z</span><span class="hero-dot">.</span></h1>
       <p class="hero-sub">Robotics Engineer · University of Michigan — Ann Arbor · Class of 2027</p>
     </div>
 
@@ -485,41 +516,41 @@ footer {
   <div class="timeline-section">
     <div class="tl-track">
 
-      <div class="tl-node">
+      <a class="tl-node" href="https://robotics.umich.edu/academics/undergraduate/" data-url="https://robotics.umich.edu/academics/undergraduate/">
         <div class="tl-dot"></div>
         <div class="tl-inner">
           <p class="tl-date">Aug '23</p>
           <p class="tl-role">Freshman Year</p>
           <p class="tl-place">UMich</p>
         </div>
-      </div>
+      </a>
 
-      <div class="tl-node">
+      <a class="tl-node" href="https://www.starship.xyz/" data-url="https://www.starship.xyz/">
         <div class="tl-dot"></div>
         <div class="tl-inner">
           <p class="tl-date">Jan '25</p>
           <p class="tl-role">Robot Tech<br>Site Lead</p>
           <p class="tl-place">Starship</p>
         </div>
-      </div>
+      </a>
 
-      <div class="tl-node">
+      <a class="tl-node" href="https://www.serverobotics.com/" data-url="https://www.serverobotics.com/">
         <div class="tl-dot"></div>
         <div class="tl-inner">
           <p class="tl-date">May '25</p>
           <p class="tl-role">Hardware<br>Intern</p>
           <p class="tl-place">Serve Robotics</p>
         </div>
-      </div>
+      </a>
 
-      <div class="tl-node">
+      <a class="tl-node" href="https://www.newhaptics.com/" data-url="https://www.newhaptics.com/">
         <div class="tl-dot"></div>
         <div class="tl-inner">
           <p class="tl-date">Jan '26</p>
           <p class="tl-role">Hardware<br>Intern</p>
           <p class="tl-place">New Haptics</p>
         </div>
-      </div>
+      </a>
 
       <div class="tl-node">
         <div class="tl-dot now"></div>
@@ -1029,6 +1060,12 @@ footer {
   document.querySelectorAll('a, button, .menu-row, .sv-card').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+  });
+  document.querySelectorAll('.tl-node[data-url]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = el.dataset.url;
+    });
   });
 
   function show(id) {
