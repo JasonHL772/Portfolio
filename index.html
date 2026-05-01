@@ -159,6 +159,7 @@ nav {
   --sweep-line: 0px;
   --sweep-opacity: 1;
   --sweep-scale: 1;
+  --sweep-lens-width: 66px;
 }
 .tl-track::before {
   content: '';
@@ -196,7 +197,8 @@ nav {
   transform: scale(1);
 }
 .tl-track:hover::after,
-.tl-track:hover .tl-sweep-dot {
+.tl-track:hover .tl-sweep-dot,
+.tl-track:hover .tl-sweep-lens {
   opacity: 0;
 }
 a.tl-node {
@@ -228,6 +230,20 @@ a.tl-node .tl-inner {
   transform: scale(var(--sweep-scale));
   transform-origin: center;
   z-index: 2;
+}
+.tl-sweep-lens {
+  position: absolute;
+  top: 3px; left: calc(var(--sweep-x) + 6.5px);
+  width: var(--sweep-lens-width);
+  height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(200,185,122,0), rgba(200,185,122,0.88), rgba(200,185,122,0));
+  box-shadow: 0 0 12px rgba(200,185,122,0.32);
+  opacity: var(--sweep-opacity);
+  pointer-events: none;
+  transform: translateX(-50%) scaleX(var(--sweep-scale));
+  transform-origin: center;
+  z-index: 1;
 }
 .tl-dot {
   position: absolute;
@@ -554,6 +570,7 @@ footer {
   <div class="timeline-section">
     <div class="tl-track">
       <span class="tl-sweep-dot"></span>
+      <span class="tl-sweep-lens"></span>
 
       <a class="tl-node" href="https://robotics.umich.edu/academics/undergraduate/" data-url="https://robotics.umich.edu/academics/undergraduate/">
         <div class="tl-dot"></div>
@@ -1106,7 +1123,9 @@ footer {
   const timelineTrack = document.querySelector('.tl-track');
   if (timelineTrack) {
     const timelineNodes = Array.from(timelineTrack.querySelectorAll('.tl-node'));
-    const timelineDuration = 18000;
+    const holdDuration = 3000;
+    const travelDuration = 2200;
+    const resetDuration = 1000;
     let timelineHovering = false;
     let timelineStart = null;
 
@@ -1120,17 +1139,48 @@ footer {
     });
 
     const easeOut = value => 1 - Math.pow(1 - value, 2);
+    const easeInOut = value => value < 0.5
+      ? 2 * value * value
+      : 1 - Math.pow(-2 * value + 2, 2) / 2;
 
     function animateTimelineSweep(now) {
       if (!timelineStart) timelineStart = now;
 
       if (!timelineHovering) {
-        const rect = timelineTrack.getBoundingClientRect();
         const trackWidth = timelineTrack.clientWidth;
-        const exitX = Math.max(trackWidth + 32, window.innerWidth - rect.left + 32);
-        const progress = ((now - timelineStart) % timelineDuration) / timelineDuration;
-        const x = progress * exitX;
-        const fade = progress > 0.96 ? Math.max(0, 1 - ((progress - 0.96) / 0.04)) : 1;
+        const nodePositions = timelineNodes.map(node => node.offsetLeft);
+        const lastNodeIndex = nodePositions.length - 1;
+        const loopDuration = (timelineNodes.length * holdDuration) + (lastNodeIndex * travelDuration) + resetDuration;
+        let elapsed = (now - timelineStart) % loopDuration;
+        let x = nodePositions[0] || 0;
+        let fade = 1;
+
+        for (let i = 0; i < timelineNodes.length; i++) {
+          if (elapsed < holdDuration) {
+            x = nodePositions[i];
+            break;
+          }
+          elapsed -= holdDuration;
+
+          if (i < lastNodeIndex) {
+            if (elapsed < travelDuration) {
+              const progress = easeInOut(elapsed / travelDuration);
+              x = nodePositions[i] + ((nodePositions[i + 1] - nodePositions[i]) * progress);
+              break;
+            }
+            elapsed -= travelDuration;
+          } else {
+            const resetProgress = Math.min(elapsed / resetDuration, 1);
+            if (resetProgress < 0.5) {
+              x = nodePositions[lastNodeIndex];
+              fade = 1 - easeInOut(resetProgress * 2);
+            } else {
+              x = nodePositions[0];
+              fade = easeInOut((resetProgress - 0.5) * 2);
+            }
+          }
+        }
+
         const radius = Math.max(90, trackWidth * 0.16);
         let strongestLift = 0;
 
