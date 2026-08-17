@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -441,6 +441,7 @@ a.tl-node .tl-inner {
   letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--faint); background: none; border: none;
   cursor: none; padding: 0; transition: color 0.2s;
+  text-decoration: none;
 }
 .back-btn:hover { color: var(--accent); }
 .bcsep { color: var(--border2); }
@@ -629,11 +630,11 @@ footer {
 <div class="cursor" id="cursor"></div>
 
 <nav>
-  <a class="nav-logo" href="#" onclick="goHome(event)">JHL</a>
+  <a class="nav-logo" href="#home">JHL</a>
   <ul class="nav-links">
     <li><a href="assets/resume.pdf" target="_blank">Resume</a></li>
     <li><a href="https://linkedin.com/in/jasonhernandezlopez" target="_blank">LinkedIn</a></li>
-    <li><a href="#" onclick="goHome(event); setTimeout(()=>document.getElementById('hbottom').scrollIntoView({behavior:'smooth'}),80)">Contact</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
@@ -644,7 +645,7 @@ footer {
     <div class="hero-text">
       <h1 class="hero-name"><span class="nl">J</span><span class="nl">A</span><span class="nl">S</span><span class="nl">O</span><span class="nl">N</span><br><span class="nl">H</span><span class="nl">E</span><span class="nl">R</span><span class="nl">N</span><span class="nl">A</span><span class="nl">N</span><span class="nl">D</span><span class="nl">E</span><span class="nl">Z</span><br><span class="nl">L</span><span class="nl">O</span><span class="nl">P</span><span class="nl">E</span><span class="nl">Z</span><span class="hero-dot">.</span></h1>
       <p class="hero-sub">Robotics Engineer | University of Michigan, Ann Arbor | Expected 2027</p>
-      <p class="hero-note">Seeking full-time mechatronics roles. Focused on mechanical and mechanism design plus electronics. U.S. resident and open to relocation.</p>
+      <p class="hero-note">Seeking full-time mechatronics roles. Focused on mechanical and mechanism design plus electronics. Authorized to work in the U.S. and open to relocation.</p>
     </div>
 
 
@@ -721,7 +722,7 @@ footer {
       <span>No.</span><span>Project</span><span>Type</span>
     </div>
 
-    <a class="menu-row" onclick="show('stryker')" href="#">
+    <a class="menu-row" href="#stryker">
       <span class="menu-num">01</span>
       <div class="menu-row-inner">
         <p class="menu-pname">STRYKER</p>
@@ -736,7 +737,7 @@ footer {
       <span class="menu-arrow">></span>
     </a>
 
-    <a class="menu-row" onclick="show('sentinel')" href="#">
+    <a class="menu-row" href="#sentinel">
       <span class="menu-num">02</span>
       <div class="menu-row-inner">
         <p class="menu-pname">SENTINEL</p>
@@ -751,22 +752,22 @@ footer {
       <span class="menu-arrow">></span>
     </a>
 
-    <a class="menu-row" onclick="show('ranger')" href="#">
+    <a class="menu-row" href="#forkrunner">
       <span class="menu-num">03</span>
       <div class="menu-row-inner">
-        <p class="menu-pname">RANGER</p>
-        <span class="menu-psub">Low-Cost Autonomous Robot</span>
+        <p class="menu-pname">FORKRUNNER</p>
+        <span class="menu-psub">Machined Forklift Robot</span>
         <div class="menu-tags">
-          <span class="mtag">Odometry</span>
-          <span class="mtag">Dead Reckoning</span>
-          <span class="mtag">State Machine</span>
+          <span class="mtag">Engineering Analysis</span>
+          <span class="mtag">Mechanical Design</span>
+          <span class="mtag">Machining</span>
         </div>
       </div>
-      <span class="menu-type">Embedded</span>
+      <span class="menu-type">Mechanical + Mfg</span>
       <span class="menu-arrow">></span>
     </a>
 
-    <a class="menu-row" onclick="show('leonardo')" href="#">
+    <a class="menu-row" href="#leonardo">
       <span class="menu-num">04</span>
       <div class="menu-row-inner">
         <p class="menu-pname">LEONARDO</p>
@@ -781,8 +782,23 @@ footer {
       <span class="menu-arrow">></span>
     </a>
 
-    <a class="menu-row" onclick="show('pathfinder')" href="#">
+    <a class="menu-row" href="#ranger">
       <span class="menu-num">05</span>
+      <div class="menu-row-inner">
+        <p class="menu-pname">RANGER</p>
+        <span class="menu-psub">Low-Cost Autonomous Robot</span>
+        <div class="menu-tags">
+          <span class="mtag">Odometry</span>
+          <span class="mtag">Dead Reckoning</span>
+          <span class="mtag">State Machine</span>
+        </div>
+      </div>
+      <span class="menu-type">Embedded</span>
+      <span class="menu-arrow">></span>
+    </a>
+
+    <a class="menu-row" href="#pathfinder">
+      <span class="menu-num">06</span>
       <div class="menu-row-inner">
         <p class="menu-pname">PATHFINDER</p>
         <span class="menu-psub">One-Week Line Follower</span>
@@ -793,21 +809,6 @@ footer {
         </div>
       </div>
       <span class="menu-type">Embedded</span>
-      <span class="menu-arrow">></span>
-    </a>
-
-    <a class="menu-row" onclick="show('forkrunner')" href="#">
-      <span class="menu-num">06</span>
-      <div class="menu-row-inner">
-        <p class="menu-pname">FORKRUNNER</p>
-        <span class="menu-psub">Machined Forklift Robot</span>
-        <div class="menu-tags">
-          <span class="mtag">Engineering Analysis</span>
-          <span class="mtag">Mechanical Design</span>
-          <span class="mtag">Machining</span>
-        </div>
-      </div>
-      <span class="menu-type">Mechanical + Mfg</span>
       <span class="menu-arrow">></span>
     </a>
 
@@ -829,7 +830,7 @@ footer {
     </div>
     <div class="hb-block">
       <span class="hb-label">Mobility</span>
-      <span class="hb-val">U.S. resident<br>Open to relocation</span>
+      <span class="hb-val">Authorized to work in the U.S.<br>Open to relocation</span>
     </div>
     <div class="hb-block">
       <span class="hb-label">Email</span>
@@ -843,21 +844,21 @@ footer {
 <!-- STRYKER picker -->
 <div id="stryker" class="page">
   <div class="detail-wrap">
-    <div class="back-row"><button class="back-btn" onclick="goHome()"><- All Projects</button></div>
+    <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
     <p class="d-eyebrow">Project 01 - Full-Stack Robotics</p>
     <h1 class="d-title">STRYKER</h1>
     <p class="d-lead">A 6 DOF robotic arm built across two versions. V1 proved I could design, build, wire, and manually control a full arm from scratch. V2 pushed that same platform into autonomous pick and place using overhead vision, inverse kinematics, servo calibration, and custom electronics.</p>
     <div class="sv-grid">
-      <a class="sv-card" onclick="show('stryker1')" href="#">
+      <a class="sv-card" href="#stryker-v1">
         <span class="sv-v">Version 01</span>
         <p class="sv-name">STRYKER V1</p>
         <p class="sv-desc">First build. I designed the arm, chose the servos, assembled the printed structure, and proved full manual control across all 6 joints.</p>
         <div class="sv-tags"><span class="mtag">Rapid Prototyping</span><span class="mtag">Mechatronics</span><span class="mtag">Product Design</span></div>
       </a>
-      <a class="sv-card" onclick="show('stryker2')" href="#">
+      <a class="sv-card" href="#stryker-v2">
         <span class="sv-v">Version 02</span>
         <p class="sv-name">STRYKER V2</p>
-        <p class="sv-desc">Autonomous pick and place with overhead vision, custom electronics, geometric IK, servo calibration, and 3 successful pick-and-place cycles.</p>
+        <p class="sv-desc">Autonomous pick and place with overhead vision, custom electronics, geometric IK, and servo calibration, completing three consecutive autonomous pick-and-place cycles.</p>
         <div class="sv-tags"><span class="mtag">Computer Vision</span><span class="mtag">Inv. Kinematics</span><span class="mtag">Custom PCB</span></div>
       </a>
     </div>
@@ -868,7 +869,7 @@ footer {
 <div id="stryker1" class="page">
   <div class="detail-wrap">
     <div class="back-row">
-      <button class="back-btn" onclick="show('stryker')"><- Stryker</button>
+      <a class="back-btn" href="#stryker"><- Stryker</a>
       <span class="bcsep">/</span><span class="bccur">Version 1</span>
     </div>
     <p class="d-eyebrow">Project 01 | Version 01</p>
@@ -933,7 +934,7 @@ footer {
 <div id="stryker2" class="page">
   <div class="detail-wrap">
     <div class="back-row">
-      <button class="back-btn" onclick="show('stryker')"><- Stryker</button>
+      <a class="back-btn" href="#stryker"><- Stryker</a>
       <span class="bcsep">/</span><span class="bccur">Version 2</span>
     </div>
     <p class="d-eyebrow">Project 01 | Version 02</p>
@@ -946,7 +947,7 @@ footer {
       <div class="spec-cell"><p class="spec-lbl">Vision</p><p class="spec-val">Overhead iPhone + workspace markers</p></div>
       <div class="spec-cell"><p class="spec-lbl">Software</p><p class="spec-val">Python / OpenCV pipeline</p></div>
       <div class="spec-cell"><p class="spec-lbl">Calibration</p><p class="spec-val">Camera mapping + measured servo calibration</p></div>
-      <div class="spec-cell"><p class="spec-lbl">Outcome</p><p class="spec-val">3 successful autonomous pick-and-place cycles</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Outcome</p><p class="spec-val">Completed three consecutive autonomous pick-and-place cycles</p></div>
     </div>
     <div class="dsec">
       <p class="dsec-ttl">Redesign</p>
@@ -1010,7 +1011,7 @@ footer {
       <p class="dsec-ttl">Autonomous Pick Sequence</p>
       <ul class="blist">
         <li>After the block was detected and the arm knew how to reach it, the robot followed the same routine every time: move above the block, lower down, close the gripper, lift the block, carry it to the drop zone, release it, and move back up</li>
-        <li>I also smoothed the servo motion so the arm would not jump sharply between positions. That made the movement steadier, reduced shaking, and helped the robot complete 3 full autonomous pick-and-place cycles</li>
+        <li>I also smoothed the servo motion so the arm would not jump sharply between positions. That made the movement steadier, reduced shaking, and helped the robot complete three consecutive autonomous pick-and-place cycles</li>
       </ul>
     </div>
     <div class="dsec">
@@ -1026,7 +1027,7 @@ footer {
 <!-- SENTINEL -->
 <div id="sentinel" class="page">
   <div class="detail-wrap">
-    <div class="back-row"><button class="back-btn" onclick="goHome()"><- All Projects</button></div>
+    <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
     <p class="d-eyebrow">Project 02 - Controls and Mechatronics</p>
     <h1 class="d-title">SENTINEL</h1>
     <p class="d-lead">A self-balancing ball robot built from scratch. The goal was to keep an unstable robot standing upright by combining drivetrain design, sensors, and real-time control.</p>
@@ -1101,8 +1102,8 @@ footer {
 <!-- RANGER -->
 <div id="ranger" class="page">
   <div class="detail-wrap">
-    <div class="back-row"><button class="back-btn" onclick="goHome()"><- All Projects</button></div>
-    <p class="d-eyebrow">Project 03 - Embedded Systems</p>
+    <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
+    <p class="d-eyebrow">Project 05 - Embedded Systems</p>
     <h1 class="d-title">RANGER</h1>
     <p class="d-lead">A low-cost autonomous robot that tracked its own position, avoided obstacles, found a bright orange target, and stored detections in a simple 2D map.</p>
     <div class="media-block">
@@ -1177,7 +1178,7 @@ footer {
 <!-- LEONARDO -->
 <div id="leonardo" class="page">
   <div class="detail-wrap">
-    <div class="back-row"><button class="back-btn" onclick="goHome()"><- All Projects</button></div>
+    <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
     <p class="d-eyebrow">Project 04 - Controls and Embedded</p>
     <h1 class="d-title">LEONARDO</h1>
     <p class="d-lead">A 2-axis drawing robot that turned input images into motor commands and reproduced them physically on paper for under $200.</p>
@@ -1240,8 +1241,8 @@ footer {
 <!-- PATHFINDER -->
 <div id="pathfinder" class="page">
   <div class="detail-wrap">
-    <div class="back-row"><button class="back-btn" onclick="goHome()"><- All Projects</button></div>
-    <p class="d-eyebrow">Project 05 - Embedded Systems</p>
+    <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
+    <p class="d-eyebrow">Project 06 - Embedded Systems</p>
     <h1 class="d-title">PATHFINDER</h1>
     <p class="d-lead">A one-week line-following robot built to prove that cheap sensors and a simple control stack could still produce reliable autonomous motion.</p>
     <div class="media-block">
@@ -1310,12 +1311,12 @@ footer {
 <!-- FORKRUNNER -->
 <div id="forkrunner" class="page">
   <div class="detail-wrap">
-    <div class="back-row"><button class="back-btn" onclick="goHome()"><- All Projects</button></div>
-    <p class="d-eyebrow">Project 06 - Mechanical and Manufacturing</p>
+    <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
+    <p class="d-eyebrow">Project 03 - Mechanical and Manufacturing</p>
     <h1 class="d-title">FORKRUNNER</h1>
     <p class="d-lead">A machined mobile robot with a working forklift mechanism, built mostly from raw stock aluminum and designed around incline climbing, lifting, and transport.</p>
     <div class="spec-grid">
-      <div class="spec-cell"><p class="spec-lbl">Gear Reduction</p><p class="spec-val">344.2:1 (verified safety margin)</p></div>
+      <div class="spec-cell"><p class="spec-lbl">Gear Reduction</p><p class="spec-val">344:1 (verified safety margin)</p></div>
       <div class="spec-cell"><p class="spec-lbl">Incline Rating</p><p class="spec-val">25 degrees worst-case traversal</p></div>
       <div class="spec-cell"><p class="spec-lbl">Lift</p><p class="spec-val">Lead-screw, empirically characterized</p></div>
       <div class="spec-cell"><p class="spec-lbl">Fabrication</p><p class="spec-val">Manual mill and lathe from stock aluminum</p></div>
@@ -1336,7 +1337,7 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Used worst-case torque analysis to size the drivetrain for a 25 degree incline, which led to a 344.2:1 reduction with a safe margin</li>
+        <li>Used worst-case torque analysis to size the drivetrain for a 25 degree incline, which led to a 344:1 reduction with a safe margin</li>
         <li>Designed the chassis around alignment, stiffness, and manufacturability, then machined the parts myself on a manual mill and lathe from stock aluminum</li>
       </ul>
     </div>
@@ -1459,15 +1460,37 @@ footer {
     requestAnimationFrame(animateTimelineSweep);
   }
 
-  function show(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    const el = document.getElementById(id);
-    if (el) { el.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  const routePages = {
+    home: 'home',
+    stryker: 'stryker',
+    'stryker-v1': 'stryker1',
+    'stryker-v2': 'stryker2',
+    sentinel: 'sentinel',
+    forkrunner: 'forkrunner',
+    leonardo: 'leonardo',
+    ranger: 'ranger',
+    pathfinder: 'pathfinder'
+  };
+
+  function renderRoute({ smooth = false } = {}) {
+    const route = window.location.hash.slice(1) || 'home';
+    const isContact = route === 'contact';
+    const pageId = isContact ? 'home' : (routePages[route] || 'home');
+
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+
+    requestAnimationFrame(() => {
+      if (isContact) {
+        document.getElementById('hbottom').scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' });
+      } else {
+        window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+      }
+    });
   }
-  function goHome(e) {
-    if (e) e.preventDefault();
-    show('home');
-  }
+
+  window.addEventListener('hashchange', () => renderRoute({ smooth: true }));
+  renderRoute();
 
 </script>
 </body>
