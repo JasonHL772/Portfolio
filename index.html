@@ -847,18 +847,18 @@ footer {
     <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
     <p class="d-eyebrow">Project 01 - Full-Stack Robotics</p>
     <h1 class="d-title">STRYKER</h1>
-    <p class="d-lead">A 6 DOF robotic arm built across two versions. V1 proved I could design, build, wire, and manually control a full arm from scratch. V2 pushed that same platform into autonomous pick and place using overhead vision, inverse kinematics, servo calibration, and custom electronics.</p>
+    <p class="d-lead">A 6 DOF robotic arm developed across two versions. V1 validated the mechanical, electrical, and actuation foundation; V2 added overhead vision, inverse kinematics, calibration, and autonomous pick and place.</p>
     <div class="sv-grid">
       <a class="sv-card" href="#stryker-v1">
         <span class="sv-v">Version 01</span>
         <p class="sv-name">STRYKER V1</p>
-        <p class="sv-desc">First build. I designed the arm, chose the servos, assembled the printed structure, and proved full manual control across all 6 joints.</p>
+        <p class="sv-desc">Manual-control prototype used to validate the printed structure, servo selection, wiring, power system, and full 6-joint operation.</p>
         <div class="sv-tags"><span class="mtag">Rapid Prototyping</span><span class="mtag">Mechatronics</span><span class="mtag">Product Design</span></div>
       </a>
       <a class="sv-card" href="#stryker-v2">
         <span class="sv-v">Version 02</span>
         <p class="sv-name">STRYKER V2</p>
-        <p class="sv-desc">Autonomous pick and place with overhead vision, custom electronics, geometric IK, and servo calibration, completing three consecutive autonomous pick-and-place cycles.</p>
+        <p class="sv-desc">Autonomous pick and place using overhead vision, custom electronics, geometric inverse kinematics, and servo calibration.</p>
         <div class="sv-tags"><span class="mtag">Computer Vision</span><span class="mtag">Inv. Kinematics</span><span class="mtag">Custom PCB</span></div>
       </a>
     </div>
@@ -875,7 +875,7 @@ footer {
     <p class="d-eyebrow">Project 01 | Version 01</p>
     <div class="v-badge">V1 - Initial Build</div>
     <h1 class="d-title">STRYKER V1</h1>
-    <p class="d-lead">First version of STRYKER. Built to prove I could design, assemble, and manually control a full 6 DOF arm from scratch.</p>
+    <p class="d-lead">Manual-control 6 DOF robotic arm prototype built to validate the mechanical, electrical, and actuation foundation for later autonomous operation.</p>
     <div class="media-block">
       <div class="media-grid">
         <figure class="media-card wide">
@@ -893,7 +893,15 @@ footer {
       <div class="spec-cell"><p class="spec-lbl">Outcome</p><p class="spec-val">Full 6-joint manual operation</p></div>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Mechanical</p>
+      <p class="dsec-ttl">Requirements & Constraints</p>
+      <ul class="blist">
+        <li>Achieve independent manual control of six joints</li>
+        <li>Build a functional arm from FDM-printed PLA components, hobby servos, and low-cost embedded hardware</li>
+        <li>Validate joint clearance, alignment, wiring, and power behavior before adding autonomy</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Mechanical Design</p>
       <div class="media-block">
         <div class="media-grid">
           <figure class="media-card wide">
@@ -903,9 +911,9 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Designed the arm around three simple goals: enough reach, smooth joint motion, and a structure I could actually build</li>
-        <li>Printed the structure in PLA and kept refining fit, alignment, and joint clearances until all six joints moved cleanly</li>
-        <li>Ended with full joint-by-joint manual control, which proved the arm could work as a user-driven pick-and-place platform</li>
+        <li>Designed a 6 DOF arm with base yaw, shoulder, elbow, two wrist joints, and a gripper</li>
+        <li>Iterated the printed structure to improve fit, alignment, and joint clearance</li>
+        <li>Focused the first version on a buildable structure with usable reach and smooth joint motion</li>
       </ul>
     </div>
     <div class="dsec">
@@ -919,13 +927,14 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Used an ESP32, a servo driver, and breadboard wiring so each joint could be tested one at a time</li>
-        <li>The 6V power system included bulk capacitors and a power switch to keep testing stable when the servos pulled sudden current</li>
+        <li>Used an ESP32 and dedicated servo driver to command each joint independently</li>
+        <li>Built the system on a breadboard so individual joints could be tested and debugged during integration</li>
+        <li>Added bulk capacitance and a power switch to stabilize the 6 V supply during servo current transients</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Lessons Carried into V2</p>
-      <p>V1 proved the arm could work, but it also exposed the next problems to solve: bulk, wiring, clearances, and accuracy. Those issues directly shaped the shorter, cleaner autonomous redesign in V2.</p>
+      <p class="dsec-ttl">Verification & V2 Inputs</p>
+      <p>Achieved full manual operation across all six joints, validating the arm structure, actuator selection, wiring approach, and power system. V1 also exposed packaging, wiring, clearance, and positioning issues that directly drove the smaller mechanical layout, cleaner electronics, and calibration process used in V2.</p>
     </div>
   </div>
 </div>
@@ -940,7 +949,7 @@ footer {
     <p class="d-eyebrow">Project 01 | Version 02</p>
     <div class="v-badge">V2 - Autonomous Pick and Place</div>
     <h1 class="d-title">STRYKER V2</h1>
-    <p class="d-lead">Second version of STRYKER. I rebuilt the arm to be smaller, cleaner, and capable of autonomous pick and place.</p>
+    <p class="d-lead">Autonomous 6 DOF robotic arm that detects a target block, calculates a joint solution, and executes a tabletop pick-and-place sequence.</p>
     <div class="spec-grid">
       <div class="spec-cell"><p class="spec-lbl">DOF</p><p class="spec-val">6 (J1 yaw, J2-J3 pitch, J4-J5 wrist, J6 gripper)</p></div>
       <div class="spec-cell"><p class="spec-lbl">Controller</p><p class="spec-val">Arduino Nano + PCA9685 PWM driver</p></div>
@@ -950,7 +959,16 @@ footer {
       <div class="spec-cell"><p class="spec-lbl">Outcome</p><p class="spec-val">Completed three consecutive autonomous pick-and-place cycles</p></div>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Redesign</p>
+      <p class="dsec-ttl">Requirements & Constraints</p>
+      <ul class="blist">
+        <li>Detect a red block within a fixed tabletop workspace and transfer it without operator input</li>
+        <li>Use an overhead camera, hobby servos, and a 3D-printed mechanical structure</li>
+        <li>Improve the packaging, wiring, and repeatability issues identified in V1</li>
+        <li>Keep the arm, camera, controller, and power system compact enough for one workstation</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Mechanical Redesign</p>
       <div class="media-block">
         <div class="media-grid">
           <figure class="media-card wide">
@@ -964,8 +982,9 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Shortened the links, cleaned up the layout, and made the arm less bulky than V1 so it could move more smoothly</li>
-        <li>Checked reach, balance, and tipping risk before fabrication so the new version would stay stable while still covering the workspace</li>
+        <li>Shortened the links and reorganized the arm layout to reduce bulk and improve motion</li>
+        <li>Evaluated reach, balance, and tipping risk before fabrication</li>
+        <li>Built a more compact structure while preserving coverage of the required workspace</li>
       </ul>
     </div>
     <div class="dsec">
@@ -979,9 +998,9 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Before the arm could pick up the block, it first had to know where the block was on the table. I mounted an iPhone above the workspace so the whole area stayed visible in one simple top-down camera view</li>
-        <li>I placed four markers around the workspace so the software could learn how positions in the camera image matched real positions on the table. That way, the robot was not just seeing pixels. It was understanding where the block was in real space</li>
-        <li>From there, I used OpenCV to look specifically for the red block and ignore most of the rest of the scene. Once the block was found, that location became the target for the arm</li>
+        <li>Used an overhead iPhone camera and four workspace markers to map image coordinates to positions on the table</li>
+        <li>Used OpenCV to identify the red block and generate a pickup target</li>
+        <li>Implemented geometric inverse kinematics to convert the target position into joint commands</li>
       </ul>
     </div>
     <div class="dsec">
@@ -995,31 +1014,27 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Designed a custom carrier board that combined the Arduino Nano and PCA9685 and routed all six servo signal lines cleanly</li>
-        <li>Moving off the breadboard removed wiring issues and made the arm much easier to assemble, test, and debug</li>
+        <li>Designed a custom carrier board integrating an Arduino Nano, PCA9685 PWM driver, and six servo signal connections</li>
+        <li>Replaced breadboard wiring with a cleaner, more serviceable control layout</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Inverse Kinematics & Servo Calibration</p>
+      <p class="dsec-ttl">Calibration & Motion Control</p>
       <ul class="blist">
-        <li>Once the robot knew where the block was, the next problem was figuring out how each joint should move to reach it. I used inverse kinematics, which is the math that turns one target point into angle commands for the base, shoulder, elbow, and wrist</li>
-        <li>That worked well as a starting point, but real servos do not move as perfectly as the math assumes. Even when the target location was correct, the real arm could still land a little off</li>
-        <li>To make it more accurate, I tested real arm positions and used those measurements to calibrate the servo commands. That helped the software control the physical arm more reliably, not just the ideal version of it on paper</li>
+        <li>Measured real arm positions and calibrated servo commands to reduce mismatch between the kinematic model and the physical arm</li>
+        <li>Smoothed joint motion between positions to reduce shaking during transfer</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Autonomous Pick Sequence</p>
+      <p class="dsec-ttl">Verification</p>
       <ul class="blist">
-        <li>After the block was detected and the arm knew how to reach it, the robot followed the same routine every time: move above the block, lower down, close the gripper, lift the block, carry it to the drop zone, release it, and move back up</li>
-        <li>I also smoothed the servo motion so the arm would not jump sharply between positions. That made the movement steadier, reduced shaking, and helped the robot complete three consecutive autonomous pick-and-place cycles</li>
+        <li>Completed three consecutive autonomous pick-and-place cycles in the defined workstation</li>
+        <li>Each cycle detected the block, approached the pickup location, grasped it, transferred it to the drop zone, and returned clear</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Challenges & Next Steps</p>
-      <ul class="blist">
-        <li>The hardest part was not making the robot work once. It was making it work the same way over and over again. Small camera errors or small servo errors could build up and cause misses after a few runs</li>
-        <li>The next step would be tighter calibration and live visual feedback, so the arm could keep checking where the block is while it moves and correct itself in real time instead of relying only on the first measurement</li>
-      </ul>
+      <p class="dsec-ttl">Remaining Limitation</p>
+      <p>Repeatability was limited by camera-to-table calibration and servo-position error. A future revision would use visual feedback during motion to correct target position in real time.</p>
     </div>
   </div>
 </div>
@@ -1030,7 +1045,7 @@ footer {
     <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
     <p class="d-eyebrow">Project 02 - Controls and Mechatronics</p>
     <h1 class="d-title">SENTINEL</h1>
-    <p class="d-lead">A self-balancing ball robot built from scratch. The goal was to keep an unstable robot standing upright by combining drivetrain design, sensors, and real-time control.</p>
+    <p class="d-lead">Self-balancing robot that uses an omni-wheel drivetrain, inertial sensing, and closed-loop control to remain upright on a ball.</p>
     <div class="media-block">
       <div class="media-grid">
         <figure class="media-card wide">
@@ -1048,7 +1063,15 @@ footer {
       <div class="spec-cell"><p class="spec-lbl">Outcome</p><p class="spec-val">Self-balanced for 64 seconds</p></div>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Motor Sizing</p>
+      <p class="dsec-ttl">Requirements & Constraints</p>
+      <ul class="blist">
+        <li>Maintain upright balance on an unstable spherical platform</li>
+        <li>React quickly enough to move the ball under the robot as it tilts</li>
+        <li>Integrate drivetrain, sensors, power electronics, and real-time control using available motors, encoders, IMU sensing, and a 12 V battery system</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Motor Sizing & Mechanical Design</p>
       <div class="media-block">
         <div class="media-grid">
           <figure class="media-card wide">
@@ -1058,30 +1081,30 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>A ball robot is always trying to fall over, so the motors have to react fast enough to roll the ball underneath the robot and catch it</li>
-        <li>I estimated the torque needed for that correction, then chose the motors and gearbox around that load so the robot would have enough power to balance</li>
+        <li>Estimated the torque required to correct tilt and selected the motor and gearbox combination around that load</li>
+        <li>Designed the motor mount and omni-wheel layout to transfer wheel motion into controlled ball motion</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Motion Model</p>
+      <p class="dsec-ttl">Controls & Sensing</p>
       <ul class="blist">
-        <li>I also had to understand how motor rotation would actually move the ball under the robot</li>
-        <li>That motion model connected a small tilt error to the wheel response needed to correct it, which is what made closed-loop balancing possible</li>
+        <li>Used an IMU to measure tilt and angular motion and encoders to measure wheel rotation</li>
+        <li>Developed a motion model linking tilt error to wheel response</li>
+        <li>Implemented balance and steering control loops, prioritizing balance as the first functional milestone</li>
       </ul>
     </div>
     <div class="dsec">
       <p class="dsec-ttl">Sensors, Control & Logging</p>
       <ul class="blist">
-        <li>The IMU measured tilt and angular motion, and the encoders tracked how the wheels were turning. Together, they gave the controller the feedback it needed to decide how to respond</li>
-        <li>Bluetooth let me send commands and re-zero the robot during testing, and UART logging let me tune the system from real data instead of guessing</li>
+        <li>Used Bluetooth for commands and re-zeroing during tests</li>
+        <li>Logged data over UART to tune from measured system behavior</li>
       </ul>
     </div>
     <div class="dsec">
       <p class="dsec-ttl">Balance Controller</p>
       <ul class="blist">
-        <li>I built separate control loops for balancing and steering, but balancing was the main challenge and the first milestone I focused on fully completing</li>
-        <li>I tuned the P, I, and D gains through repeated live tests and filtered the IMU data so sensor noise would not make the controller overreact</li>
-        <li>With that control loop in place, the robot could keep making small corrections fast enough to stay upright</li>
+        <li>Tuned PID gains through repeated live testing</li>
+        <li>Filtered IMU data to reduce noise-driven controller response</li>
       </ul>
     </div>
     <div class="dsec">
@@ -1094,7 +1117,7 @@ footer {
           </figure>
         </div>
       </div>
-      <p>SENTINEL successfully balanced for 64 seconds on top of the ball. Steering was the next step, but balancing for over a minute was the clearest proof that the drivetrain, sensors, and control logic were all working together.</p>
+      <p>Successfully balanced upright for 64 seconds. Balancing was demonstrated; steering while maintaining stable balance was the next system-level capability to complete.</p>
     </div>
   </div>
 </div>
@@ -1105,15 +1128,7 @@ footer {
     <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
     <p class="d-eyebrow">Project 05 - Embedded Systems</p>
     <h1 class="d-title">RANGER</h1>
-    <p class="d-lead">A low-cost autonomous robot that tracked its own position, avoided obstacles, found a bright orange target, and stored detections in a simple 2D map.</p>
-    <div class="media-block">
-      <div class="media-grid">
-        <figure class="media-card wide">
-          <img src="assets/images/projects/ranger-final-build.jpg" alt="Finished RANGER autonomous robot build">
-          <figcaption>Final build</figcaption>
-        </figure>
-      </div>
-    </div>
+    <p class="d-lead">Low-cost autonomous mobile robot that estimates position, avoids obstacles, detects a bright-orange target, and records detections on a simple 2D map.</p>
     <div class="spec-grid">
       <div class="spec-cell"><p class="spec-lbl">Main Controller</p><p class="spec-val">BeagleBone Blue</p></div>
       <div class="spec-cell"><p class="spec-lbl">Sensor MCU</p><p class="spec-val">Arduino Nano</p></div>
@@ -1123,21 +1138,25 @@ footer {
       <div class="spec-cell"><p class="spec-lbl">Outcome</p><p class="spec-val">Obstacle avoidance, orange target approach, 2D mapping</p></div>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Odometry & Error Analysis</p>
+      <p class="dsec-ttl">Requirements & Constraints</p>
       <ul class="blist">
-        <li>Used encoder counts and IMU heading to estimate where the robot was as it moved</li>
-        <li>Ran repeated square-path trials and compared the final pose against ruler measurements to measure drift and show where feedback control was needed</li>
+        <li>Navigate autonomously using differential drive and estimate position from encoder and IMU feedback</li>
+        <li>Avoid obstacles using low-cost range sensors</li>
+        <li>Detect a bright-orange target using onboard vision and record detections on a 2D map</li>
+        <li>Integrate sensing, control, and mapping across a BeagleBone Blue and Arduino Nano</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Closed-Loop Control</p>
+      <p class="dsec-ttl">Odometry & Closed-Loop Motion</p>
       <ul class="blist">
-        <li>Used simple waypoint math. The robot first turned toward the next point, then drove the straight-line distance to get there</li>
-        <li>Added heading and distance feedback so it could correct drift while moving instead of trusting dead reckoning alone</li>
+        <li>Used wheel encoder counts and IMU heading to estimate robot position during motion</li>
+        <li>Ran repeated square-path trials and compared final pose with ruler measurements to evaluate drift</li>
+        <li>Used waypoint logic: turn toward the next point, then drive the required distance</li>
+        <li>Added heading and distance feedback so the robot could correct while moving instead of relying only on dead reckoning</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Navigation & Obstacle Avoidance</p>
+      <p class="dsec-ttl">Obstacle Avoidance</p>
       <div class="media-block">
         <div class="media-grid">
           <figure class="media-card wide">
@@ -1147,14 +1166,15 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Used right, front, and left ultrasonic sonars to watch clearance while driving</li>
-        <li>Set simple distance thresholds for stop and clear states, then used obstacle-avoidance routines to move around the object and return to the path</li>
+        <li>Used right, front, and left ultrasonic sensors to monitor clearance</li>
+        <li>Defined stop and clear thresholds and used obstacle-avoidance routines to navigate around obstructions before returning to the route</li>
       </ul>
     </div>
     <div class="dsec">
       <p class="dsec-ttl">Thermal Sensing & Signal Conditioning</p>
       <ul class="blist">
-        <li>Built the thermal sensing stage around an analog front end, averaged the ADC signal to steady it, and used a 1.2 V threshold to classify hot versus not hot</li>
+        <li>Built an analog front end for the thermopile sensor and averaged ADC measurements to reduce signal variation</li>
+        <li>Used a 1.2 V threshold to classify hot versus not-hot conditions</li>
       </ul>
     </div>
     <div class="dsec">
@@ -1168,9 +1188,22 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Used a USB camera and color filtering to detect a bright orange target, then tracked blob size and image location to decide whether it was visible, centered, or close</li>
-        <li>Used a blob size threshold of 15 pixels and re-centering steps before moving forward, then stored detections in a simple 2D grid map</li>
+        <li>Used a USB camera and HSV color filtering to detect a bright-orange target</li>
+        <li>Used blob size and image position to determine whether the target was visible, centered, or close</li>
+        <li>Applied a 15-pixel blob threshold and re-centering behavior before forward motion, then stored detections in a simple 2D grid map</li>
       </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Verification</p>
+      <div class="media-block">
+        <div class="media-grid">
+          <figure class="media-card wide">
+            <img src="assets/images/projects/ranger-final-build.jpg" alt="Finished RANGER autonomous robot build">
+            <figcaption>Integrated final build</figcaption>
+          </figure>
+        </div>
+      </div>
+      <p>Demonstrated obstacle avoidance, target approach, and 2D detection mapping in the integrated system. Square-path trials identified odometry drift and showed where feedback control was necessary.</p>
     </div>
   </div>
 </div>
@@ -1181,7 +1214,7 @@ footer {
     <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
     <p class="d-eyebrow">Project 04 - Controls and Embedded</p>
     <h1 class="d-title">LEONARDO</h1>
-    <p class="d-lead">A 2-axis drawing robot that turned input images into motor commands and reproduced them physically on paper for under $200.</p>
+    <p class="d-lead">Two-axis drawing robot that converts images into motion commands and reproduces them on paper for approximately $200.</p>
     <div class="spec-grid">
       <div class="spec-cell"><p class="spec-lbl">Controller</p><p class="spec-val">Arduino Nano 33 IoT w/ Motor Carrier</p></div>
       <div class="spec-cell"><p class="spec-lbl">Actuation</p><p class="spec-val">2 DC motors w/ encoders + 1 servo</p></div>
@@ -1190,7 +1223,16 @@ footer {
       <div class="spec-cell"><p class="spec-lbl">Best Runtime</p><p class="spec-val">Michigan M in about 8 minutes</p></div>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Torque Analysis & Workspace Mapping</p>
+      <p class="dsec-ttl">Requirements & Constraints</p>
+      <ul class="blist">
+        <li>Convert custom image inputs into physical drawings</li>
+        <li>Keep motor torque within a defined operating range</li>
+        <li>Work within the reachable and controllable region of the mechanism</li>
+        <li>Improve drawing runtime without reducing output quality</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Workspace & Torque Analysis</p>
       <div class="media-block">
         <div class="media-grid">
           <figure class="media-card wide">
@@ -1200,8 +1242,9 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Mapped the workspace in MATLAB and cut out regions the arm could not reach cleanly</li>
-        <li>Used torque limits to keep drawings inside areas where the motors stayed in a safe working range, below 35 percent of stall torque</li>
+        <li>Mapped the robot workspace in MATLAB and excluded regions that could not be reached cleanly</li>
+        <li>Used torque analysis to constrain drawing paths to regions below 35 percent of stall torque</li>
+        <li>Defined an optimal drawing region that balanced reachability, motor loading, and drawing quality</li>
       </ul>
     </div>
     <div class="dsec">
@@ -1215,8 +1258,9 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Converted image pixels into line segments, then turned those segments into joint commands through inverse kinematics and encoder feedback</li>
-        <li>Replaced the original left-to-right scan order with a nearest-segment search, which saved roughly 0.5 to 1 second per segment</li>
+        <li>Converted image pixels into line segments, then converted those segments into joint commands through inverse kinematics and encoder feedback</li>
+        <li>Used two DC motors with encoders for motion and a servo to control pen position</li>
+        <li>Replaced the original left-to-right scan order with a nearest-segment search to reduce non-drawing travel</li>
       </ul>
     </div>
     <div class="dsec">
@@ -1233,7 +1277,7 @@ footer {
           </figure>
         </div>
       </div>
-      <p>LEONARDO was fully built and demonstrated on paper. It drew the Mona Lisa, the Michigan M, a U.S. map, and other custom inputs. The biggest gain came from the path-planning update, which cut the Michigan M from about 10 minutes to about 8 minutes at the same quality.</p>
+      <p>Demonstrated drawings of the Mona Lisa, Michigan M, U.S. map, and other custom images. The path-planning update reduced the Michigan M drawing time from about 10 minutes to about 8 minutes at the same observed quality, saving roughly 0.5 to 1 second per segment.</p>
     </div>
   </div>
 </div>
@@ -1244,15 +1288,7 @@ footer {
     <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
     <p class="d-eyebrow">Project 06 - Embedded Systems</p>
     <h1 class="d-title">PATHFINDER</h1>
-    <p class="d-lead">A one-week line-following robot built to prove that cheap sensors and a simple control stack could still produce reliable autonomous motion.</p>
-    <div class="media-block">
-      <div class="media-grid">
-        <figure class="media-card wide">
-          <img src="assets/images/projects/pathfinder-final-build.jpg" alt="Finished PATHFINDER line-following robot build">
-          <figcaption>Final build</figcaption>
-        </figure>
-      </div>
-    </div>
+    <p class="d-lead">One-week embedded-controls project demonstrating reliable line following with low-cost sensors, encoder feedback, and a cascaded control system.</p>
     <div class="spec-grid">
       <div class="spec-cell"><p class="spec-lbl">Platform</p><p class="spec-val">MBot (differential drive)</p></div>
       <div class="spec-cell"><p class="spec-lbl">Microcontroller</p><p class="spec-val">Raspberry Pi Pico (MicroPython)</p></div>
@@ -1264,15 +1300,26 @@ footer {
       <div class="spec-cell"><p class="spec-lbl">Outcome</p><p class="spec-val">Reliable full-course completion</p></div>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Encoder & Motor Control</p>
+      <p class="dsec-ttl">Requirements & Constraints</p>
       <ul class="blist">
-        <li>Used interrupt-driven quadrature decoding in MicroPython so wheel motion was captured without polling delays, then drove the motors with 10 kHz PWM and verified wheel speed on the oscilloscope</li>
+        <li>Complete the defined line-following course autonomously</li>
+        <li>Build and validate the system within one week</li>
+        <li>Use a Raspberry Pi Pico, low-cost reflectance sensing, and differential drive</li>
+        <li>Maintain stable wheel speed and line tracking despite sensor noise and motor-current transients</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Motor Control</p>
+      <ul class="blist">
+        <li>Used interrupt-driven quadrature decoding in MicroPython to capture wheel motion without polling delays</li>
+        <li>Drove the motors using 10 kHz PWM and verified wheel-speed behavior on an oscilloscope</li>
       </ul>
     </div>
     <div class="dsec">
       <p class="dsec-ttl">PID Wheel Speed Controller</p>
       <ul class="blist">
-        <li>Built a discrete PID speed controller, tuned it from logged speed and current data, and added saturation handling to prevent windup</li>
+        <li>Built a discrete PID wheel-speed controller from logged speed and current data</li>
+        <li>Added saturation handling to prevent integral windup</li>
       </ul>
     </div>
     <div class="dsec">
@@ -1286,23 +1333,28 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Used a 7-channel reflectance array with a PCA9557 I/O expander to read the line through I2C</li>
-        <li>The hardest part was setting the sensor height low enough to see the line clearly but high enough not to scrape the floor</li>
+        <li>Used a 7-channel IR reflectance array with a PCA9557 I/O expander over I2C</li>
+        <li>Set sensor height to maintain reliable line detection while avoiding contact with the floor</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Bang-Bang to PID Cascade</p>
+      <p class="dsec-ttl">Line Guidance & Verification</p>
       <div class="media-block">
         <div class="media-grid">
           <figure class="media-card wide">
             <img src="assets/images/projects/pathfinder-following-path.jpg" alt="PATHFINDER following the taped line course">
             <figcaption>Following the course</figcaption>
           </figure>
+          <figure class="media-card wide">
+            <img src="assets/images/projects/pathfinder-final-build.jpg" alt="Finished PATHFINDER line-following robot build">
+            <figcaption>Integrated final build</figcaption>
+          </figure>
         </div>
       </div>
       <ul class="blist">
-        <li>Used the line sensor to pick left or right correction, then fed those commands into the wheel speed loop</li>
-        <li>Exponential smoothing reduced in-rush current by about 150 mA, and with a 50 ms control loop the robot completed the course reliably within the one-week build window</li>
+        <li>Used line position to choose left or right correction, then passed the command to the wheel-speed control loop</li>
+        <li>Used exponential smoothing with alpha about 0.75 to reduce in-rush current by about 150 mA</li>
+        <li>Ran the system with a 50 ms control loop and completed the course reliably within the one-week development window</li>
       </ul>
     </div>
   </div>
@@ -1314,7 +1366,7 @@ footer {
     <div class="back-row"><a class="back-btn" href="#home"><- All Projects</a></div>
     <p class="d-eyebrow">Project 03 - Mechanical and Manufacturing</p>
     <h1 class="d-title">FORKRUNNER</h1>
-    <p class="d-lead">A machined mobile robot with a working forklift mechanism, built mostly from raw stock aluminum and designed around incline climbing, lifting, and transport.</p>
+    <p class="d-lead">Machined aluminum mobile robot with an integrated lead-screw forklift, designed for incline climbing, lifting, and object transport.</p>
     <div class="spec-grid">
       <div class="spec-cell"><p class="spec-lbl">Gear Reduction</p><p class="spec-val">344:1 (verified safety margin)</p></div>
       <div class="spec-cell"><p class="spec-lbl">Incline Rating</p><p class="spec-val">25 degrees worst-case traversal</p></div>
@@ -1323,7 +1375,16 @@ footer {
       <div class="spec-cell"><p class="spec-lbl">Outcome</p><p class="spec-val">Climbed incline and transported objects</p></div>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Chassis & Drivetrain</p>
+      <p class="dsec-ttl">Requirements & Constraints</p>
+      <ul class="blist">
+        <li>Traverse a 25 degree worst-case incline</li>
+        <li>Lift and transport objects with a controlled vertical lift mechanism</li>
+        <li>Manufacture most structural parts from raw aluminum stock using a manual mill and lathe</li>
+        <li>Maintain chassis alignment and stiffness while keeping parts practical to machine</li>
+      </ul>
+    </div>
+    <div class="dsec">
+      <p class="dsec-ttl">Drivetrain Analysis & Chassis Design</p>
       <div class="media-block">
         <div class="media-grid">
           <figure class="media-card wide">
@@ -1337,12 +1398,14 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Used worst-case torque analysis to size the drivetrain for a 25 degree incline, which led to a 344:1 reduction with a safe margin</li>
-        <li>Designed the chassis around alignment, stiffness, and manufacturability, then machined the parts myself on a manual mill and lathe from stock aluminum</li>
+        <li>Calculated the drivetrain torque required for the 25 degree incline load case</li>
+        <li>Selected a 344:1 gear reduction to retain torque margin during incline climbing</li>
+        <li>Designed the chassis around drivetrain alignment, stiffness, manufacturability, and assembly access</li>
+        <li>Created CAD and part drawings before machining the aluminum components</li>
       </ul>
     </div>
     <div class="dsec">
-      <p class="dsec-ttl">Forklift Mechanism</p>
+      <p class="dsec-ttl">Lift Mechanism & Verification</p>
       <div class="media-block">
         <div class="media-grid">
           <figure class="media-card wide">
@@ -1352,8 +1415,10 @@ footer {
         </div>
       </div>
       <ul class="blist">
-        <li>Designed a lead-screw lift because it gave controlled vertical motion and a practical force advantage for lifting objects</li>
-        <li>Sized the lift around payload force and carriage mass, used guided vertical motion to reduce binding, and finished with a forklift that could lift and transport objects</li>
+        <li>Selected a lead-screw lift for controlled vertical motion and mechanical advantage</li>
+        <li>Sized the lift around payload force and carriage mass and used guided vertical motion to reduce binding</li>
+        <li>Machined the chassis components from aluminum stock and integrated the drive system, lift carriage, and fork mechanism</li>
+        <li>Demonstrated incline climbing and object transport with the completed robot</li>
       </ul>
     </div>
   </div>
